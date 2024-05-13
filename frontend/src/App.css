@@ -1,3 +1,147 @@
-.App {
-  text-align: center;
+/* Portfolio Styles */
+
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+.container {
+  text-align: center;
+  width: 90%;
+  background-color: #ECF0F3;
+  margin: auto;
+  padding: 0px;
+}
+
+/* Navbar Styles Start */
+
+.portfolio_navbar {
+  width: 96%;
+  min-height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+}
+
+.portfolio_logo {
+  width: 100%;
+  border-radius: 100%;
+}
+
+.portfolio_icon {
+  display: none;
+}
+
+.portfolio_nav_menu {
+  display: flex;
+  justify-content: flex-end;
+  gap: 25px;
+  list-style: none;
+}
+
+.portfolio_nav_menu > li {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.portfolio_nav_menu > li:hover {
+  color: #3e8ac5;
+  cursor: pointer;
+}
+
+.portfolio_nav_links {
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+}
+
+.portfolio_nav_links:hover {
+  color: #3e8ac5;
+  cursor: pointer;
+}
+
+/* Navbar Styles End */
+
+/* Home Styles Start */
+.home_container {
+  width: 98%;
+  margin: auto;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.home_flexibility {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flexibility_divider {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 30px;
+}
+
+.welcome_title {
+  font-size: 14px;
+  color: #b9c8dd;
+  text-align: left;
+  margin: 0px;
+  padding: 0px;
+}
+
+.intro_title {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.intro_title > span {
+  color: #60C4E0;
+}
+
+/* Home Styles End */
+
+/* Small Devices Styles */
+@media screen and (max-width: 960px) {
+  .portfolio_icon {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    transform: translate(-100%, 60%);
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .portfolio_nav_menu {
+    display: flex;
+    flex-direction: column;
+    width: 79%;
+    position: absolute;
+    top: 92px;
+    left: 100%;
+    padding: 20px;
+    opacity: 1;
+    transition: all 0.5s ease;
+    background-image: linear-gradient(to bottom, rgb(229, 230, 231), #ECF0F3);
+  }
+
+  .portfolio_nav_menu.active {
+    left: 32px;
+    opacity: 1;
+    transition: all 0.5s ease;
+    z-index: 1;
+  }
+
+  .home_flexibility {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .intro_title {
+    font-size: 22px;
+    font-weight: bold;
+  }
+}
+/* Small Devices Styles */
