@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 
 const ContactPortfolio = () => {
-  const [text, setText] = useState("a Developer.");
+  const [text, setText] = useState("a Full Stack Developer.");
 
   useEffect(() => {
     const intervalId = setInterval(() => {

@@ -18,7 +18,7 @@ const NavbarPortfolio = () => {
     return (
         <div className='container'>
             <div className='portfolio_navbar'>
-                <div>
+                <div style={{ width: '100px'}}>
                     <Link to='/'>
                         <img 
                             src={shamim} 
