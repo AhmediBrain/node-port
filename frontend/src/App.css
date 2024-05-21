@@ -20,7 +20,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: auto;
 }
 
 .portfolio_logo {
@@ -80,7 +79,6 @@ body {
   width: 40%;
   display: flex;
   flex-direction: column;
-  /* margin: 20px 20px; */
   justify-content: center;
 }
 
@@ -114,6 +112,39 @@ body {
   max-width: 45%;
   position: relative;
   top: -30px;
+}
+
+.intro_skill_container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.intro_find_with {
+  display: flex;
+  flex-direction: column;
+}
+
+.social_skill_text {
+  font-size: 14px;
+  color: #1e2125;
+}
+
+.social_icons_container {
+  background: linear-gradient(90deg, #e3e9ed, #e6ebef, #e8edf0, #ebeff2, #eef2f4, #f0f4f6, #f3f6f7, #f6f8f9);
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  padding: 1px;
+}
+
+.download_resume {
+  font-size: 11px;
+  font-weight: bold;
+  color: #60C4E0;
+  margin: 2px;
+}
+
+.skills_icon {
+  width: 25px;
+  height: 25px;
 }
 
 /* Home Styles End */
@@ -162,9 +193,6 @@ body {
 
   .flexibility_divider {
     width: 100%;
-    /* display: flex;
-    flex-direction: column;
-    margin: 20px 20px; */
   }
 }
 /* Small Devices Styles */
