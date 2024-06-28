@@ -1,7 +1,11 @@
 /* Portfolio Styles */
 
-body {
+* {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.App {
+  text-align: center;
 }
 
 .container {
@@ -15,11 +19,15 @@ body {
 /* Navbar Styles Start */
 
 .portfolio_navbar {
+  position: fixed;
+  left: 0;
+  top: 0;
   width: 96%;
   min-height: 100px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  z-index: 100;
 }
 
 .portfolio_logo {
@@ -65,7 +73,7 @@ body {
 /* Home Styles Start */
 .home_container {
   width: 98%;
-  margin: auto;
+  margin: 100px auto;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
@@ -73,6 +81,8 @@ body {
 .home_flexibility {
   display: flex;
   justify-content: space-around;
+  gap: 20px;
+  padding: 20px;
 }
 
 .flexibility_divider {
@@ -147,7 +157,151 @@ body {
   height: 25px;
 }
 
+/* Features Styles */
+.feature_headers {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin: 25px;
+  padding-top: 20px;
+  line-height: 0.5;
+}
+
+.feature_headers > span {
+  font-size: 14px;
+  color: #ff014f;
+}
+
+.feature_headers > p {
+  font-size: 32px;
+  color: #3c3e41;
+}
+
+.feature_containers {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(90deg, #e3e9ed, #e6ebef, #e8edf0, #ebeff2, #eef2f4, #f0f4f6, #f3f6f7, #f6f8f9);
+  box-shadow: 3px 2px 4px 3px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 3px 2px 4px 3px rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 10px;
+  text-align: left;
+  padding: 20px;
+}
+
+.feature_containers > div > span {
+  font-size: 20px;
+  color: #1e2125;
+}
+
 /* Home Styles End */
+
+/* Dashboard Login Styles Start */
+.login_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.login_wrapper {
+  width: 420px;
+  background-color: #84a1b8;
+  box-shadow: 7px 5px 5px #b4b4b4;
+  color: #FFFFFF;
+  border-radius: 10px;
+  padding: 30px 40px;
+}
+
+.login_wrapper p {
+  font-size: 36px;
+  text-align: center;
+}
+
+.login_wrapper .login_input_box {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  background-color: #116a83;
+  margin: 20px 0px;
+  border-radius: 5px;
+}
+
+.login_input_box input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #FFFFFF;
+  padding: 0px 15px;
+}
+
+.login_input_box input::placeholder {
+  color: #949292;
+}
+
+.required_field {
+  font-size: 11px !important;
+  text-align: left !important;
+  margin-left: 5px;
+}
+
+.required_field span {
+  color: #fc1111;
+}
+
+.icon_styles {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.login_wrapper .remember_forgot {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin: -15px 0px 15px;
+}
+
+.remember_forgot a {
+  margin-right: 3px;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.remember_forgot a:hover {
+  color: #116a83;
+}
+
+.login_wrapper .submit_btn {
+  width: 100%;
+  height: 45px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  color: #0d5063;
+  border: 1px solid #116a83;
+}
+
+.login_wrapper .register_link {
+  font-size: 14px;
+  text-align: center;
+  margin: 25px 0 10px;
+}
+
+.register_link a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.register_link a:hover {
+  color: #0d5063;
+}
+/* Dashboard Login Styles End */
 
 /* Small Devices Styles */
 @media screen and (max-width: 960px) {
