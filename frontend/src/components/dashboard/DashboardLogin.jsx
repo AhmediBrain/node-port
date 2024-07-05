@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import { UserContext } from '../../context/UserContext';
 
 const DashboardLogin = () => {
     const [loginForm, setLoginForm] = useState({
@@ -11,8 +12,9 @@ const DashboardLogin = () => {
     });
 
     const [errors, setErrors] = useState({});
+    const { setUser } = useContext(UserContext);
 
-    const [loginStatus, setLoginStatus] = useState('');
+    const navigate = useNavigate();
 
     const handleLoginChange = (e) => {
         const { name, value } = e.target;
@@ -42,7 +44,6 @@ const DashboardLogin = () => {
         e.preventDefault();
 
         const errorValidation = formValidation();
-        console.log('Validation:', errorValidation);
         if(Object.keys(errorValidation).length > 0) {
             setErrors(errorValidation);
             return;
@@ -55,28 +56,24 @@ const DashboardLogin = () => {
                 user_name: loginForm.userLogin,
                 password: loginForm.userPassword
             });
-            console.log('Users Data:', response.data);
-
+            
+            setUser(response.data.user_name);
             alert('Successfully Logged In.');
-            setLoginStatus('Successfully Logged In.')
+            navigate('/dashboard');
         } catch(error) {
             if(error.response) {
                 if(error.response.status === 401) {
                     alert('Password does not match with username.');
-                    setLoginStatus('Password does not match with username.');
                 } 
                 else if(error.response.status === 404) {
                     alert('User not found.');
-                    setLoginStatus('User not found.');
                 } 
                 else {
                     setErrors({ general: 'An error occurred.' });
-                    setLoginStatus('An error occurred.');
                 }
             } 
             else {
                 setErrors({ general: 'An error occurred.' });
-                setLoginStatus('An error occurred.');
             }
         }
     }
@@ -97,7 +94,7 @@ const DashboardLogin = () => {
                         <PermIdentityOutlinedIcon 
                             sx={{fontSize: '25px'}}
                             className='icon_styles' />
-                        {errors.userLogin && <span>{errors.userLogin}</span>}
+                        {errors.userLogin && <span className='required_msg'>{errors.userLogin}</span>}
                     </div>
                     <div className='login_input_box'>
                         <input 
@@ -110,6 +107,7 @@ const DashboardLogin = () => {
                         <PasswordOutlinedIcon 
                             sx={{fontSize: '25px'}}
                             className='icon_styles' />
+                        {errors.userPassword && <span className='required_msg'>{errors.userPassword}</span>}
                     </div>
                     <div className='remember_forgot'>
                         <label>
@@ -129,7 +127,6 @@ const DashboardLogin = () => {
                         </span>
                     </div>
                 </form>
-                <p>{loginStatus}</p>
             </div>
         </div>
     )

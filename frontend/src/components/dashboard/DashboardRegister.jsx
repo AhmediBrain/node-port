@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
 const DashboardRegister = () => {
     const [formData, setFormData] = useState({
@@ -10,6 +11,8 @@ const DashboardRegister = () => {
     });
 
     const [errors, setErrors] = useState({});
+
+    const navigate = useNavigate();
 
     const handleFormChange = (e) => {
         const { name, value } = e.target;
@@ -31,7 +34,8 @@ const DashboardRegister = () => {
         }
         if(userEmail === '') {
             newErrors.userEmail = 'User Email is required.';
-        } else {
+        } 
+        else {
             const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
             if(!emailPattern.test(userEmail)) {
                 newErrors.userEmail = 'Please enter a valid email address.';
@@ -74,6 +78,7 @@ const DashboardRegister = () => {
             });
 
             alert('Registration Successfully Submitted.');
+            navigate('/login');
         } catch(error) {
             console.log('An error occurred while registering the user!', error);
         }

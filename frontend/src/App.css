@@ -16,6 +16,10 @@
   padding: 0px;
 }
 
+a {
+  text-decoration: none;
+}
+
 /* Navbar Styles Start */
 
 .portfolio_navbar {
@@ -252,6 +256,12 @@
   color: #fc1111;
 }
 
+.required_msg {
+  color: #FC1111;
+  font-size: 11px;
+  text-align: left;
+}
+
 .icon_styles {
   position: absolute;
   right: 20px;
@@ -263,7 +273,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 14px;
-  margin: -15px 0px 15px;
+  margin: 20px 0px;
 }
 
 .remember_forgot a {

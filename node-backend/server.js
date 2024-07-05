@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
+const multer = require('multer');
 
 const app = express();
 
@@ -25,6 +26,19 @@ db.connect((err) => {
     console.log('Connected to the database.');
 });
 
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/');
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + '-' + file.originalname);
+    }
+});
+
+const upload = multer({ storage: storage });
+
+app.use(express.urlencoded({ extended: true }));
+
 app.get('/', (req, res) => {
     return res.json('From Backend !!!');
 });
@@ -38,7 +52,7 @@ app.get('/users', (req, res) => {
 });
 
 app.post('/users/register', async (req, res) => {
-    const { user_name, password, user_email, user_phone }  = req.body;
+    const { user_name, password, user_email, user_phone } = req.body;
 
     if(!user_name || !password || !user_email) {
         return res.status(400).send({ message: 'These fields are required.'});
@@ -91,6 +105,33 @@ app.post('/users/login', (req, res) => {
     });
 });
 
+app.post('/users/add-user', upload.single('user_img'), async (req, res) => {
+    const { user_name, user_email, user_phone, password, firstname, lastname, address, state, country } = req.body;
+    const user_img = req.file ? req.file.path : null;
+
+    if(!user_name || !user_email || !password || !firstname || !lastname) {
+        return res.status(400).send({ message: 'These fields are required!' });
+    }
+
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const usersQuery = "INSERT INTO users (user_name, user_email, user_phone, password, firstname, lastname, address, state, country, user_img) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        const usersValue = [user_name, user_email, user_phone, hashedPassword, firstname, lastname, address, state, country, user_img];
+
+        db.query(usersQuery, usersValue, (error, result) => {
+            if(error) {
+                res.status(500).send('Internal Server Error!', error);
+            } 
+            else {
+                res.status(201).send('New User Added Successfully.');
+            }
+        });
+    } catch(error) {
+        console.log('Error:', error);
+        res.status(500).send('Internal Server Error!', error);
+    }
+});
+
 app.listen(8030, () => {
-    console.log('Server is listening.')
+    console.log('Server is listening.');
 });
