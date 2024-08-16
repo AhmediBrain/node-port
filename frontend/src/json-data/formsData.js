@@ -92,5 +92,37 @@ export const tableTitle = [
     {
         id: 7,
         title: 'Address'
+    },
+    {
+        id: 8,
+        title: 'Action'
     }
 ];
+
+export const profileInformation = [
+    {
+        id: 1,
+        title: 'First Name:',
+        key: 'firstname'
+    },
+    {
+        id: 2,
+        title: 'Last Name:',
+        key: 'lastname'
+    },
+    {
+        id: 3,
+        title: 'Address:',
+        key: 'address'
+    },
+    {
+        id: 4,
+        title: 'State:',
+        key: 'state'
+    },
+    {
+        id: 5,
+        title: 'Country:',
+        key: 'country'
+    }
+]

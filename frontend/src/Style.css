@@ -141,8 +141,32 @@ input::placeholder {
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 7px;
-    padding: 10px;
+    padding: 15px;
     z-index: 1000;
+}
+
+.avatar_dropdown a {
+    font-size: 13px;
+    color: #8172b9;
+    cursor: pointer;
+    text-align: left;
+}
+
+.avatar_dropdown a:hover {
+    color: #6439FF;
+}
+
+.avatar_dropdown button {
+    font-size: 13px;
+    color: #8172b9;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0px;
+}
+
+.avatar_dropdown button:hover {
+    color: #6439FF;
 }
 /* Dashboard Navbar Styles End */
 
@@ -281,6 +305,37 @@ input::placeholder {
     flex: 6;
 }
 
+.users_title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.users_title p {
+    font-size: 24px;
+    color: #5f5e5e;
+    margin: 0px;
+}
+
+.users_title_link {
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+    color: #6439ff;
+    padding: 5px 7px;
+    border: 0.5px solid #6439ff;
+    border-radius: 5px;
+}
+
+.users_title_link:hover {
+    text-decoration: none;
+    background-color: #6439ff;
+    color: #FFFFFF;
+    transition: ease-in-out 0.5s;
+}
+
 .users_table_container {
     margin: 25px;
 }
@@ -289,12 +344,110 @@ input::placeholder {
     border: 1px solid #aaa9a9;
 }
 
+.users_table_container table tbody tr td {
+    font-size: 14px;
+}
+
+.users_table_container table tbody tr td span {
+    font-size: 11px;
+}
+
 .users_table_container table {
     width: 100%;
     overflow-x: auto;
     color: #8172b9;
 }
 /* Users Table Styles End */
+
+/* Users Profile Styles Start */
+.user_profile {
+    display: flex;
+    width: 100%;
+}
+
+.profile_container {
+    flex: 6;
+}
+
+.userprofile_container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.userprofile_left {
+    width: 30%;
+    background-color: #FFFFFF;
+    box-shadow: 3px 3px 10px 3px #cecdcd;
+    -webkit-box-shadow: 3px 3px 10px 3px #cecdcd;
+    -moz-box-shadow: 3px 3px 10px 3px #cecdcd;
+    
+}
+
+.userprofile_left div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2%;
+}
+
+.userprofile_left div.profile_summary {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile_summary span {
+    font-size: 13px;
+    color: #6e59bb;
+    margin-left: 5%;
+}
+
+.userprofile_right {
+    width: 65%;
+    background-color: #FFFFFF;
+    box-shadow: 3px 3px 10px 3px #cecdcd;
+    -webkit-box-shadow: 3px 3px 10px 3px #cecdcd;
+    -moz-box-shadow: 3px 3px 10px 3px #cecdcd;
+    padding: 0 2%;
+}
+
+.userprofile_right p {
+    font-size: 17px;
+    font-weight: bold;
+    color: #6439FF;
+    text-align: left;
+}
+
+.profile_information {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+    align-items: flex-start;
+}
+
+.profile_information div {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 10px;
+    padding: 2px 5px;
+    background-color: #eeecec;
+}
+
+.profile_information p {
+    font-size: 14px;
+    color: #6a58ac;
+    font-weight: 300;
+    margin: 5px;
+}
+
+.profile_information input {
+    border: solid 1px #cecdcd;
+    outline: none;
+    padding: 3px;
+}
+/* Users Profile Styles End */
 
 @media (max-width: 599px) {
     .widgets {

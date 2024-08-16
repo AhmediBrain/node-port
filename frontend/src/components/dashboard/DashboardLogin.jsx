@@ -114,7 +114,7 @@ const DashboardLogin = () => {
                             <input type='checkbox' />
                             Remember Me
                         </label>
-                        <a href='#'>Forgot password?</a>
+                        <a href='/forgot-password'>Forgot password?</a>
                     </div>
                     <button 
                         type='submit' 

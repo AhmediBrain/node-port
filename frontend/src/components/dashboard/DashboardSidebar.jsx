@@ -14,7 +14,7 @@ const DashboardSidebar = () => {
       <div className='sidebar_top'>
         <Link to="/">
           <span className='sidebar_top_logo'>
-            Ahmed
+            Portfolio
           </span>
         </Link>
       </div>

@@ -2,11 +2,13 @@ import React, { useContext, useState } from 'react'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import figma from '../../images/figma.png'
 import { UserContext } from '../../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const DashboardNavbar = () => {
     const { user, logout } = useContext(UserContext);
     const [search, setSearch] = useState('');
     const [show, setShow] = useState(false);
+    const navigate = useNavigate();
 
     const handleSearchChange = (e) => {
         setSearch(e.target.value);
@@ -20,6 +22,11 @@ const DashboardNavbar = () => {
     const avatarDetails = () => {
         setShow(!show);
         console.log('Click');
+    }
+
+    const handleLogout = () => {
+        logout();
+        navigate('/login');
     }
     
     return (
@@ -47,8 +54,8 @@ const DashboardNavbar = () => {
                         {show && 
                             (
                                 <div className='avatar_dropdown'>
-                                    <a href='#'>Profile</a>
-                                    <a href='/login'>Sign out</a>
+                                    <a href='/profile'>Profile</a>
+                                    <button onClick={handleLogout}>Sign out</button>
                                 </div>
                             )
                         }
