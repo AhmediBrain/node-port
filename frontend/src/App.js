@@ -13,12 +13,18 @@ import { userInputs } from './json-data/formsData';
 import UsersAllView from './components/users/UsersAllView';
 import UsersProfile from './components/users/UsersProfile';
 import { useContext } from 'react';
+import QuarterlyProgressReport from './quarterly-progress/QuarterlyProgressReport';
+import ClockInClockOut from './ClockInClockOut';
+import PracticeTableAndDelete from './practice-test/PracticeTableAndDelete';
 
 function App() {
   return (
     <div className='App'>
       <div className="container">
-        <BrowserRouter>
+        <PracticeTableAndDelete />
+        {/* <ClockInClockOut /> */}
+        {/* <QuarterlyProgressReport /> */}
+        {/* <BrowserRouter>
           <UserProvider>
             <ConditionalNavbar />
             <Routes>
@@ -48,25 +54,25 @@ function App() {
               } />
             </Routes>
           </UserProvider>
-        </BrowserRouter>
+        </BrowserRouter> */}
       </div>
     </div>
   );
 }
 
-const ConditionalNavbar = () => {
-  const location = useLocation();
-  const hideNavbarPaths = [ '/dashboard', '/login', '/register', '/add-user', '/users', '/profile/:userID'];
+// const ConditionalNavbar = () => {
+//   const location = useLocation();
+//   const hideNavbarPaths = [ '/dashboard', '/login', '/register', '/add-user', '/users', '/profile/:userID'];
 
-  const shouldShowNavbar = !hideNavbarPaths.some(path => matchPath(path, location.pathname));
+//   const shouldShowNavbar = !hideNavbarPaths.some(path => matchPath(path, location.pathname));
 
-  return shouldShowNavbar ? <NavbarPortfolio /> : null;
-}
+//   return shouldShowNavbar ? <NavbarPortfolio /> : null;
+// }
 
-const PrivateRoute = ({ children }) => {
-  const { user } = useContext(UserContext);
+// const PrivateRoute = ({ children }) => {
+//   const { user } = useContext(UserContext);
 
-  return user ? children : <Navigate to='/login' />
-}
+//   return user ? children : <Navigate to='/login' />
+// }
 
 export default App;

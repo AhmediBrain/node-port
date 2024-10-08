@@ -1,0 +1,66 @@
+/* Quarterly Progress Report */
+
+.sidebar {
+    width: 220px;
+    /* float: left; */
+    /* margin-right: 20px; */
+    position: fixed;
+    top: 0;
+    background-color: #f1f1f1;
+    padding: 3px;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.sidebar div {
+    padding: 3px;
+    cursor: pointer;
+    margin-bottom: 5px;
+    background-color: #f9f9f9;
+    text-align: left;
+}
+
+.sidebar div:hover {
+    background-color: #e0e0e0;
+}
+
+.table_content {
+    margin-left: 220px;
+    padding: 20px;
+}
+
+.table_content table {
+    width: 100%; /* Ensure the table takes the full width of its container */
+}
+
+tbody .tbody-gap td {
+    margin-bottom: 20px; /* Creates a 20px gap */
+}
+
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.selected {
+    background-color: #d1e7dd; /* Highlight color for selected td */
+}
+
+.objective {
+    margin-top: 10px;
+}
+  
+/* Quarterly Progress Report */
+
+@media (max-width: 599px) {
+    .sidebar {
+        display: none;
+    }
+
+    .table_content {
+        padding: 20px;
+        margin-left: 0px;
+    }
+}
