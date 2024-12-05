@@ -16,12 +16,14 @@ import { useContext } from 'react';
 import QuarterlyProgressReport from './quarterly-progress/QuarterlyProgressReport';
 import ClockInClockOut from './ClockInClockOut';
 import PracticeTableAndDelete from './practice-test/PracticeTableAndDelete';
+import PracticeFetchTableData from './practice-test/PracticeFetchTableData';
 
 function App() {
   return (
     <div className='App'>
       <div className="container">
         <PracticeTableAndDelete />
+        {/* <PracticeFetchTableData /> */}
         {/* <ClockInClockOut /> */}
         {/* <QuarterlyProgressReport /> */}
         {/* <BrowserRouter>

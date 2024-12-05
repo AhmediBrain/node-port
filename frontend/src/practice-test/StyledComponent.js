@@ -10,6 +10,9 @@ export const StyledButton = styled.button`
         props.variant === 'addnew' ? '#6C78AF' : '#558496'
     };
     color: ${(props) => props.variant === 'outline' ? '#558496' : '#FFFFFF'};
+    width: ${(props) => 
+        props.variant === 'addnew' && '200px'
+    };
 `;
 
 // export const StyledButton = styled.button`

@@ -125,3 +125,57 @@ export const initialUsersData = [
         }
     }
 ];
+
+export const studentsData = [
+    {
+      student: "MYKEL BECKFORD",
+      sessions: [
+        {
+          date: "2024-10-07",
+          service: "Occupational Therapy",
+          provider: "Alicia Tauro",
+          hours: 1,
+          madeUp: false,
+          madeUpDate: null,
+          madeUpHours: 0,
+          outstandingHours: 1,
+        },
+        {
+          date: "2024-10-10",
+          service: "Speech-Language Therapy",
+          provider: null,
+          hours: 1,
+          madeUp: false,
+          madeUpDate: null,
+          madeUpHours: 0,
+          outstandingHours: 1,
+        },
+      ],
+    },
+    {
+      student: "AMAYAH CALDERON",
+      sessions: [
+        {
+          date: "2024-10-07",
+          service: "Vision",
+          provider: "Daria Shevchenko",
+          hours: 1,
+          madeUp: true,
+          madeUpDate: "2024-10-08",
+          madeUpHours: 1,
+          outstandingHours: 0,
+        },
+        {
+          date: "2024-10-09",
+          service: "Vision",
+          provider: "Daria Shevchenko",
+          hours: 1,
+          madeUp: false,
+          madeUpDate: null,
+          madeUpHours: 0,
+          outstandingHours: 1,
+        },
+      ],
+    },
+  ];
+  
