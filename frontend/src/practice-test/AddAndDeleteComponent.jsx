@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
-import { StyledButton, StyledDiv, StyledField, StyledInput, StyledPara, Table, TableHeader, TableHeaderCell, TableRow } from './StyledComponent'
-import { TableCell } from '@mui/material';
-import { initialUsersData, usersTitle } from './practiceData';
+import React, { useState } from 'react';
+import { StyledButton, StyledDiv, StyledField, StyledInput, StyledPara, Table, TableCell, TableHeader, TableHeaderCell, TableRow } from './StyledComponent';
+import { usersTitle } from './practiceData';
 
-const PracticeTableAndDelete = () => {
-    const [users, setUsers] = useState(initialUsersData);
+const AddAndDeleteComponent = () => {
+    const [users, setUsers] = useState([]);
 
     const [newUser, setNewUser] = useState(
         {
-            name: '',
+            firstname: '',
+            lastname: '',
             username: '',
             email: '',
             address: {
@@ -19,12 +19,6 @@ const PracticeTableAndDelete = () => {
             }
         }
     );
-
-    const handleRowDelete = (userId) => {
-        const updateUser = users.filter((user) => user.id !== userId);
-        setUsers(updateUser);
-        console.log('Deleted:', userId, updateUser);
-    }
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -38,58 +32,79 @@ const PracticeTableAndDelete = () => {
                     [addressField]: value
                 }
             }));
+        } 
+        else {
+            setNewUser((prevValue) => ({
+                ...prevValue,
+                [name]: value
+            }));
         }
-        setNewUser((prevValue) => ({
-            ...prevValue,
-            [name]: value
-        }));
-        console.log(`Name: ${name}, Value: ${value}`);
     }
 
-    const AddNewUser = () => {
-        if(newUser.name && newUser.username && newUser.email) {
-            const userId = users.length + 1;
-            setUsers((prevUsers) => [
-                ...prevUsers,
-                { ...newUser, id: userId }
+    const addNewUser = () => {
+        if(!newUser.firstname || !newUser.lastname || !newUser.username || !newUser.email) {
+            alert('Please fill all the required fields');
+            return;
+        } 
+        else {
+            const userID = users.length + 1;
+            console.log('User ID:', userID);
+            setUsers([
+                ...users,
+                { ...newUser, id: userID }
             ]);
+            alert('New user added successfully.');
 
-            alert('New User added successfully.');
+            setNewUser(
+                {
+                    firstname: '',
+                    lastname: '',
+                    username: '',
+                    email: '',
+                    address: {
+                        street: '',
+                        suite: '',
+                        city: '',
+                        zipcode: ''
+                    }
+                }
+            )
         }
 
-        setNewUser(
-            {
-                name: '',
-                username: '',
-                email: '',
-                address: {
-                    street: '',
-                    suite: '',
-                    city: '',
-                    zipcode: ''
-                }
-            }
-        )
         console.log('New User:', newUser);
     }
-    
+
+    const handleRowDelete = (userId) => {
+        const updateUser = users.filter((user) => user.id !== userId);
+        setUsers(updateUser);
+        console.log('Deleted:', userId, updateUser);
+    }
+
     return (
         <StyledDiv>
             <div>
-                <StyledPara>Practice Table And Delete Function</StyledPara>
+                <StyledPara>Add And Delete Functions</StyledPara>
             </div>
-            <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <h3>Add New User</h3>
                 <StyledField>
-                    <legend>Name</legend>
+                    <legend>First Name</legend>
                     <StyledInput 
                         type='text' 
-                        name='name' 
-                        value={newUser.name} 
+                        name='firstname' 
+                        value={newUser.firstname} 
                         onChange={handleInputChange} />
                 </StyledField>
                 <StyledField>
-                    <legend>User Name</legend>
+                    <legend>Last Name</legend>
+                    <StyledInput 
+                        type='text' 
+                        name='lastname' 
+                        value={newUser.lastname} 
+                        onChange={handleInputChange} />
+                </StyledField>
+                <StyledField>
+                    <legend>Username</legend>
                     <StyledInput 
                         type='text' 
                         name='username' 
@@ -137,44 +152,43 @@ const PracticeTableAndDelete = () => {
                         onChange={handleInputChange} />
                 </StyledField>
                 <div style={{ display: 'flex', margin: '14px' }}>
-                    <StyledButton variant='addnew'  
-                        onClick={AddNewUser}>
-                        Add User
+                    <StyledButton 
+                        type='addnew' 
+                        onClick={addNewUser}>
+                        Add New
                     </StyledButton>
                 </div>
             </div>
 
-            <div style={{ overflowX: 'auto' }}>
+            <div style={{ marginBottom: '20px' }}>
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            {usersTitle.map((item) => {
+                            {usersTitle.map((user) => {
                                 return(
-                                    <TableHeaderCell key={item.id}>
-                                        {item.title}
+                                    <TableHeaderCell key={user.id}>
+                                        {user.title}
                                     </TableHeaderCell>
                                 )
                             })}
                         </TableRow>
                     </TableHeader>
-
                     <tbody>
                         {users.map((user, index) => {
                             const { street, suite, city, zipcode } = user.address;
-                            // console.log('User:', user);
                             return(
                                 <TableRow key={index}>
-                                    <TableCell>{user.name}</TableCell>
+                                    <TableCell>{`${user.firstname} ${user.lastname}`}</TableCell>
                                     <TableCell>{user.username}</TableCell>
                                     <TableCell>{user.email}</TableCell>
                                     <TableCell>
-                                        <span style={{ fontSize: '11px' }}>Street: {street}</span>
+                                        <span style={{ color: '#504c4c',fontSize: '11px' }}>Street: {street}</span>
                                         <br />
-                                        <span style={{ fontSize: '11px' }}>Suite: {suite}</span>
+                                        <span style={{ color: '#504c4c', fontSize: '11px' }}>Suite: {suite}</span>
                                         <br />
-                                        <span style={{ fontSize: '11px' }}>City: {city}</span>
+                                        <span style={{ color: '#504c4c', fontSize: '11px' }}>City: {city}</span>
                                         <br />
-                                        <span style={{ fontSize: '11px' }}>ZipCode: {zipcode}</span>
+                                        <span style={{ color: '#504c4c', fontSize: '11px' }}>ZipCode: {zipcode}</span>
                                     </TableCell>
                                     <TableCell>
                                         <StyledButton 
@@ -192,4 +206,4 @@ const PracticeTableAndDelete = () => {
     )
 }
 
-export default PracticeTableAndDelete
+export default AddAndDeleteComponent

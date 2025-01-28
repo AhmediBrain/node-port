@@ -1,22 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
+import BasicHomeComponent from '../../practice-test/BasicHomeComponent'
 
 const AboutPortfolio = () => {
-  const [inputText, setInputText] = useState('');
-  const [displayText, setDisplayText] = useState('');
-
-  const handleAddClick = () => {
-    setDisplayText(inputText);
-  };
 
   return (
-    <div>
-      <input 
-        placeholder='Please type here' 
-        value={inputText}
-        onChange={(e) => setInputText(e.target.value)}
-      />
-      <button onClick={handleAddClick}>Add</button>
-      <p>{displayText}</p>
+    <div className='home_container'>
+      <BasicHomeComponent />
     </div>
   );
 }

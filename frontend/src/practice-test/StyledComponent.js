@@ -6,12 +6,12 @@ export const StyledButton = styled.button`
     border-radius: 8px;
     cursor: pointer;
     background-color: ${(props) => 
-        props.variant === 'outline' ? '#ECF0F3' : 
-        props.variant === 'addnew' ? '#6C78AF' : '#558496'
+        props.type === 'outline' ? '#ECF0F3' : 
+        props.type === 'addnew' ? '#6C78AF' : '#558496'
     };
-    color: ${(props) => props.variant === 'outline' ? '#558496' : '#FFFFFF'};
+    color: ${(props) => props.type === 'outline' ? '#558496' : '#FFFFFF'};
     width: ${(props) => 
-        props.variant === 'addnew' && '200px'
+        props.type === 'addnew' && '200px'
     };
 `;
 

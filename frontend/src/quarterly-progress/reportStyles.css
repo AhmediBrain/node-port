@@ -1,66 +1,83 @@
-/* Quarterly Progress Report */
-
-.sidebar {
-    width: 220px;
-    /* float: left; */
-    /* margin-right: 20px; */
-    position: fixed;
-    top: 0;
-    background-color: #f1f1f1;
-    padding: 3px;
-    height: 100vh;
-    overflow-y: auto;
-}
-
-.sidebar div {
-    padding: 3px;
-    cursor: pointer;
-    margin-bottom: 5px;
-    background-color: #f9f9f9;
-    text-align: left;
-}
-
-.sidebar div:hover {
-    background-color: #e0e0e0;
-}
-
-.table_content {
-    margin-left: 220px;
+/* Navbar.css */
+.site-navbar {
+    background-color: #eee;
     padding: 20px;
+    position: relative;
 }
 
-.table_content table {
-    width: 100%; /* Ensure the table takes the full width of its container */
+.site-navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-tbody .tbody-gap td {
-    margin-bottom: 20px; /* Creates a 20px gap */
+.site-navbar-logo img {
+    max-height: 50px;
 }
 
+.site-navbar-sections {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
 
-th, td {
-    border: 1px solid #ddd;
+.site-navbar-section {
+    position: relative;
+    margin-left: 20px;
+}
+
+.site-navbar-section a {
+    text-decoration: none;
+    color: #333;
+    padding: 5px 10px;
+}
+
+.site-navbar-subsections {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    list-style: none;
     padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 10;
+    white-space: nowrap;
+}
+
+.site-navbar-section.active .site-navbar-subsections {
+    display: block;
+}
+
+.site-navbar-subsection {
+    padding: 5px 0;
     text-align: left;
 }
 
-.selected {
-    background-color: #d1e7dd; /* Highlight color for selected td */
+.site-navbar-subsection a {
+    display: block;
+    padding: 5px 10px;
+    white-space: nowrap;
 }
 
-.objective {
-    margin-top: 10px;
+.site-navbar-actions{
+    display: flex;
 }
-  
-/* Quarterly Progress Report */
 
-@media (max-width: 599px) {
-    .sidebar {
-        display: none;
-    }
-
-    .table_content {
-        padding: 20px;
-        margin-left: 0px;
-    }
+.site-navbar-action-button{
+    background-color: #777;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 10px;
 }

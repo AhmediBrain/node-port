@@ -42,7 +42,7 @@ const NewDashboardUser = ({ inputs, title }) => {
             newErrors.userEmail = 'User Email is required.';
         } 
         else {
-            const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
             if(!emailPattern.test(userEmail)) {
                 newErrors.userEmail = 'Please enter a valid email address.';
             }
@@ -127,8 +127,7 @@ const NewDashboardUser = ({ inputs, title }) => {
                 </div>
                 <div className='new_user_bottom'>
                     <div className='user_bottom_left'>
-                        <img src={file ? URL.createObjectURL(file) : 'https://us.123rf.com/450wm/urfandadashov/urfandadashov1806/urfandadashov180601827/150417827-photo-not-available-vector-icon-isolated-on-transparent-background-photo-not-available-logo-concept.jpg?ver=6'} 
-                            alt='no-image' />
+                        <img src={file ? URL.createObjectURL(file) : 'https://us.123rf.com/450wm/urfandadashov/urfandadashov1806/urfandadashov180601827/150417827-photo-not-available-vector-icon-isolated-on-transparent-background-photo-not-available-logo-concept.jpg?ver=6'} alt='' />
                     </div>
                     <div className='user_bottom_right'>
                         <form onSubmit={addNewUser}>

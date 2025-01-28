@@ -1,6 +1,10 @@
 import { BrowserRouter, matchPath, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
+//import BasicHomeComponent from './practice-test/BasicHomeComponent';
 import './Style.css';
+//import IbrainHomePage from './ibrain-website/IbrainHomePage';
+//import AddAndDeleteComponent from './practice-test/AddAndDeleteComponent';
+//import AddNewUserComponent from './practice-test/AddNewUserComponent';
 import NavbarPortfolio from './components/home-components/NavbarPortfolio';
 import AboutPortfolio from './components/home-components/AboutPortfolio';
 import HomeScreen from './components/home-components/HomeScreen';
@@ -13,20 +17,22 @@ import { userInputs } from './json-data/formsData';
 import UsersAllView from './components/users/UsersAllView';
 import UsersProfile from './components/users/UsersProfile';
 import { useContext } from 'react';
-import QuarterlyProgressReport from './quarterly-progress/QuarterlyProgressReport';
-import ClockInClockOut from './ClockInClockOut';
-import PracticeTableAndDelete from './practice-test/PracticeTableAndDelete';
-import PracticeFetchTableData from './practice-test/PracticeFetchTableData';
+// import QuarterlyProgressReport from './quarterly-progress/QuarterlyProgressReport';
+// import ClockInClockOut from './ClockInClockOut';
+// import PracticeFetchTableData from './practice-test/PracticeFetchTableData';
 
 function App() {
   return (
     <div className='App'>
       <div className="container">
-        <PracticeTableAndDelete />
+        {/* <BasicHomeComponent /> */}
+        {/* <AddAndDeleteComponent /> */}
+        {/* <AddNewUserComponent /> */}
+        {/* <IbrainHomePage /> */}
         {/* <PracticeFetchTableData /> */}
         {/* <ClockInClockOut /> */}
         {/* <QuarterlyProgressReport /> */}
-        {/* <BrowserRouter>
+        <BrowserRouter>
           <UserProvider>
             <ConditionalNavbar />
             <Routes>
@@ -56,25 +62,25 @@ function App() {
               } />
             </Routes>
           </UserProvider>
-        </BrowserRouter> */}
+        </BrowserRouter>
       </div>
     </div>
   );
 }
 
-// const ConditionalNavbar = () => {
-//   const location = useLocation();
-//   const hideNavbarPaths = [ '/dashboard', '/login', '/register', '/add-user', '/users', '/profile/:userID'];
+const ConditionalNavbar = () => {
+  const location = useLocation();
+  const hideNavbarPaths = [ '/dashboard', '/login', '/register', '/add-user', '/users', '/profile/:userID'];
 
-//   const shouldShowNavbar = !hideNavbarPaths.some(path => matchPath(path, location.pathname));
+  const shouldShowNavbar = !hideNavbarPaths.some(path => matchPath(path, location.pathname));
 
-//   return shouldShowNavbar ? <NavbarPortfolio /> : null;
-// }
+  return shouldShowNavbar ? <NavbarPortfolio /> : null;
+}
 
-// const PrivateRoute = ({ children }) => {
-//   const { user } = useContext(UserContext);
+const PrivateRoute = ({ children }) => {
+  const { user } = useContext(UserContext);
 
-//   return user ? children : <Navigate to='/login' />
-// }
+  return user ? children : <Navigate to='/login' />
+}
 
 export default App;
