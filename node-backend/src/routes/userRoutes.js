@@ -11,5 +11,6 @@ router.post('/add-user', upload.single('user_img'), userController.addUser);
 router.put('/:userID', upload.single('user_img'), userController.updateUser);
 router.get('/:userID', userController.getUserById);
 router.delete('/:id', userController.deleteUser);
+router.patch('/:id', userController.updateUserName);
 
 module.exports = router;

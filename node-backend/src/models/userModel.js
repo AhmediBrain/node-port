@@ -31,6 +31,11 @@ const deleteUser = (userID, callback) => {
     db.query(sqlQuery, [userID], callback);
 };
 
+const updateUserName = (userID, userData, callback) => {
+    const sqlQuery = "UPDATE users SET user_name = ? WHERE user_id = ?"
+    db.query(sqlQuery, [userData, userID], callback);
+}
+
 module.exports = {
     getAllUsers,
     createUser,
@@ -38,4 +43,5 @@ module.exports = {
     getUserById,
     updateUser,
     deleteUser,
+    updateUserName
 };

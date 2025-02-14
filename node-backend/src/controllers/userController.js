@@ -141,6 +141,22 @@ const deleteUser = (req, res) => {
     });
 };
 
+const updateUserName = (req, res) => {
+    const { id } = req.params;
+    const { user_name } = req.body;
+
+    if(!user_name) {
+        return res.status(400).send('User Name is required.');
+    }
+
+    userModel.updateUserName(id, user_name, (error, result) => {
+        if(error) {
+            return res.status(500).send('Failed to update User Name!');
+        }
+        return res.status(200).json({ message: 'User Name updated successfully.' });
+    });
+}
+
 module.exports = {
     getUsers,
     registerUser,
@@ -149,4 +165,5 @@ module.exports = {
     updateUser,
     getUserById,
     deleteUser,
+    updateUserName
 };
