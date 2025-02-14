@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from 'react'
 
-const BasicAnimationFunction = () => {
+const TextAnimationComponent = () => {
     const [text, setText] = useState('Full Stack Developer.');
 
     useEffect(() => {
-        const updatedText = setInterval(() => {
+        const animatedText = setInterval(() => {
             setText('Professional Coder.');
             setTimeout(() => {
                 setText('Full Stack Developer.');
             }, 2000);
         }, 4000);
 
-        return () => clearInterval(updatedText);
+        return () => clearInterval(animatedText);
     }, []);
 
     return (
         <div style={{ marginBottom: '10px' }}>
-            <h5>Text Animation Function</h5>
+            <h5>Text Animation</h5>
             <div>
-                <span style={{ fontSize: '13px', color: '#283D42' }}>He is a <span style={{ fontSize: '14px', fontWeight: 'bold', color: '#14829B' }}>{text}</span></span>
+                <span style={{ fontSize: '13px', color: '#313131' }}>He is a <span style={{ color: '#23AAF2', fontWeight: 'bold' }}>{text}</span></span>
             </div>
         </div>
     )
 }
 
-export default BasicAnimationFunction
+export default TextAnimationComponent

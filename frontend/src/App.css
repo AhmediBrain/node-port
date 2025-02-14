@@ -125,7 +125,8 @@ a {
 .intro_image_box > img {
   max-width: 45%;
   position: relative;
-  top: -30px;
+  top: -25px;
+  border-radius: 50%;
 }
 
 .intro_skill_container {

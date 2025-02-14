@@ -5,7 +5,7 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import nodejs from '../../images/nodejs.webp'
 import javascript from '../../images/javascript.webp'
 import reactjs from '../../images/reactjs.webp'
-import mypic from '../../images/mypic.png'
+import mypic from '../../images/mypic.jpg'
 
 // Template: https://rainbowit.net/html/inbio/index-white-version.html
 

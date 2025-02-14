@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { tableTitle } from '../../json-data/formsData'
 import { Link, useNavigate } from 'react-router-dom'
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
+import PostAddOutlinedIcon from '@mui/icons-material/PostAddOutlined';
+import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
 import axios from 'axios';
 
 const UsersAllTable = () => {
     const [usersData, setUsersData] = useState([]);
+    const [editID, setEditID] = useState(null);
+    const [userText, setUserText] = useState('');
 
     const navigate = useNavigate();
 
@@ -37,6 +41,38 @@ const UsersAllTable = () => {
     const userProfileDetails = (userID) => {
         navigate(`/profile/${userID}`);
         console.log('User Profile:', userID);
+    }
+
+    const handleUserTextChange = (e) => {
+        setUserText(e.target.value);
+    }
+
+    const handleEditUser = (id, currentUser) => {
+        setEditID(id);
+        setUserText(currentUser);
+    }
+
+    const handleSaveUser = (id) => {
+        axios.patch(`http://localhost:8030/users/${id}`, { user_name: userText })
+            .then(response => {
+                const updatedUsers = usersData.map(user =>
+                    user.user_id === id ? { ...user, user_name: userText } : user
+                );
+                setUsersData(updatedUsers);
+                setEditID(null);
+                alert('User updated successfully!');
+            })
+            .catch(error => {
+                console.error('Error updating user:', error);
+                alert('Failed to update user.');
+            });
+        // const updatedValue = usersData.map(
+        //     (user) => 
+        //         user.id === id ? { ...user, user_name: userText } : user
+        // );
+
+        // setUsersData(updatedValue);
+        // setEditID(null);
     }
 
     return (
@@ -77,7 +113,17 @@ const UsersAllTable = () => {
                                         <span>No Image</span>
                                     )}
                                 </td>
-                                <td>{item.user_name}</td>
+                                <td style={{ padding: '0 8px' }}>
+                                    {editID === item.user_id ? (
+                                        <input 
+                                            type='text' 
+                                            value={userText} 
+                                            onChange={handleUserTextChange} 
+                                            style={{ border: '1px solid #8172B9', outline: 'none', padding: '5px 8px' }} />
+                                    ) : (
+                                        <span style={{ fontSize: '14px' }}>{item.user_name}</span>
+                                    )}
+                                </td>
                                 <td>{item.firstname}</td>
                                 <td>{item.lastname}</td>
                                 <td>{item.user_email}</td>
@@ -88,9 +134,32 @@ const UsersAllTable = () => {
                                     <span>{item.country}</span>
                                 </td>
                                 <td>
-                                    <HighlightOffOutlinedIcon 
-                                        sx={{ fontSize: '20px', color: '#CC0000', cursor: 'pointer' }} 
-                                        onClick={() => deleteUserRow(item.user_id)} />
+                                    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                                        <button 
+                                            style={{ border: 'none', padding: '0px 3px', cursor: 'pointer' }}
+                                            onClick={() => deleteUserRow(item.user_id)}>
+                                            <HighlightOffOutlinedIcon 
+                                                sx={{ color: '#CC0000' }} 
+                                                titleAccess='Delete' />
+                                        </button>
+                                        {editID === item.user_id ? (
+                                            <button 
+                                                style={{ border: 'none', padding: '0px 3px', cursor: 'pointer' }} 
+                                                onClick={() => handleSaveUser(item.user_id)}>
+                                                <PostAddOutlinedIcon 
+                                                    sx={{ color: '#27A243' }} 
+                                                    titleAccess='Save' />
+                                            </button>
+                                        ) : (
+                                            <button 
+                                                style={{ border: 'none', padding: '0px 3px', cursor: 'pointer' }} 
+                                                onClick={() => handleEditUser(item.user_id, item.user_name)}>
+                                                <EditNoteOutlinedIcon 
+                                                    sx={{ color: '#2632a0', fontSize: '30px' }} 
+                                                    titleAccess='Edit' />
+                                            </button>
+                                        )}
+                                    </div>
                                 </td>
                             </tr>
                         )

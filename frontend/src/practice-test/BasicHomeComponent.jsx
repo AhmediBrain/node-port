@@ -3,6 +3,7 @@ import BasicAnimationFunction from './BasicAnimationFunction'
 import BasicAddDeleteFunction from './BasicAddDeleteFunction'
 import AddNewUserComponent from './AddNewUserComponent'
 import PlaceholderApiComponent from './PlaceholderApiComponent'
+//import EditComponentFunction from './EditComponentFunction'
 
 const BasicHomeComponent = () => {
     const [addShow, setAddShow] = useState(false);
@@ -48,12 +49,12 @@ const BasicHomeComponent = () => {
             <div style={{ borderBottom: '1px solid #cccbcb' }}>
                 <button 
                     onClick={showAddUserFunction} 
-                    style={{ margin: '10px' }}>
+                    style={{ margin: '10px 0 5px 0' }}>
                     {showUser ? 'Hide Add User Function' : 'Show Add User Function'}
                 </button>
                 {showUser ? <AddNewUserComponent /> : ''}
             </div>
-            <div>
+            <div style={{ borderBottom: '1px solid #cccbcb' }}>
                 <button 
                     onClick={showAPIFunction} 
                     style={{ margin: '10px' }}>
@@ -61,6 +62,9 @@ const BasicHomeComponent = () => {
                 </button>
                 {showApi ? <PlaceholderApiComponent /> : ''}
             </div>
+            {/* <div style={{ borderBottom: '1px solid #cccbcb' }}>
+                <EditComponentFunction />
+            </div> */}
         </div>
     )
 }
