@@ -1,66 +1,75 @@
 export const userInputs = [
     {
         id: 'username',
-        label: '* Username',
+        label: 'Username',
         type: 'text',
-        name: 'userName',
-        placeholder: 'Username'
+        name: 'username',
+        placeholder: 'Username',
+        required: 1
     },
     {
         id: 'firstname',
-        label: '* First Name',
+        label: 'First Name',
         type: 'text',
-        name: 'firstName',
-        placeholder: 'First Name'
+        name: 'firstname',
+        placeholder: 'First Name',
+        required: 1
     },
     {
         id: 'lastname',
-        label: '* Last Name',
+        label: 'Last Name',
         type: 'text',
-        name: 'lastName',
-        placeholder: 'Last Name'
+        name: 'lastname',
+        placeholder: 'Last Name',
+        required: 1
     },
     {
         id: 'email',
-        label: '* Email',
+        label: 'Email',
         type: 'email',
-        name: 'userEmail',
-        placeholder: 'Email'
+        name: 'useremail',
+        placeholder: 'Email',
+        required: 1
     },
     {
         id: 'phone',
         label: 'Phone',
         type: 'text',
-        name: 'userPhone',
-        placeholder: 'Phone'
+        name: 'userphone',
+        placeholder: 'Phone',
+        required: 0
     },
     {
         id: 'password',
-        label: '* Password',
+        label: 'Password',
         type: 'password',
-        name: 'userPassword',
-        placeholder: 'Password'
+        name: 'password',
+        placeholder: 'Password',
+        required: 1
     },
     {
         id: 'address',
         label: 'Address',
-        type: 'address',
-        name: 'userAddress',
-        placeholder: 'Address'
+        type: 'text',
+        name: 'address',
+        placeholder: 'Address',
+        required: 0
     },
     {
         id: 'state',
         label: 'State',
         type: 'text',
-        name: 'userState',
-        placeholder: 'State'
+        name: 'state',
+        placeholder: 'State',
+        required: 0
     },
     {
         id: 'country',
         label: 'Country',
         type: 'text',
-        name: 'userCountry',
-        placeholder: 'Country'
+        name: 'country',
+        placeholder: 'Country',
+        required: 0
     }
 ];
 

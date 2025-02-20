@@ -2,116 +2,63 @@ import React, { useState } from 'react';
 import DashboardSidebar from './DashboardSidebar';
 import DashboardNavbar from './DashboardNavbar';
 import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUploadOutlined';
-import axios from 'axios';
+
+// http://localhost:8090/phpmyadmin/index.php?route=/sql&pos=0&db=node_sample&table=users
 
 const NewDashboardUser = ({ inputs, title }) => {
     const [file, setFile] = useState(null);
-    const [profileData, setProfileData] = useState({
-        userName: '',
-        userEmail: '',
-        userPhone: '',
-        userPassword: '',
-        firstName: '',
-        lastName: '',
-        userAddress: '',
-        userState: '',
-        userCountry: ''
-    });
+    const [addProfile, setAddProfile] = useState(
+        {
+            username: '',
+            useremail: '',
+            userphone: '',
+            password: '',
+            firstname: '',
+            lastname: '',
+            address: '',
+            state: '',
+            country: ''
+        }
+    );
 
     const [errors, setErrors] = useState({});
 
-    const handleProfileChange = (e) => {
+    const handleInfoChange = (e) => {
         const { name, value } = e.target;
-        setProfileData(prevState => ({
-            ...prevState,
+
+        setAddProfile((prevValue) => ({
+            ...prevValue,
             [name]: value
-        }));    
+        }));
     }
 
     const formValidation = () => {
-        const { userName, userEmail, userPassword, firstName, lastName } = profileData;
-        const newErrors = {};
+        const { username, useremail, password, firstname, lastname } = addProfile;
+        const newErrors = {}
 
-        if(userName === '') {
-            newErrors.userName = 'Username is required.';
+        if(!file) {
+            newErrors.file = 'Image is required.';
         }
-        else if(userName.length < 4) {
-            newErrors.userName = 'Username needs at least 4 characters.';
+
+        if(username === '') {
+            newErrors.username = 'Username is required';
+        } 
+        else if(username.length < 4) {
+            newErrors.username = 'Username needs at least 4 characters.'
         }
-        if(userEmail === '') {
-            newErrors.userEmail = 'User Email is required.';
+        if(useremail === '') {
+            newErrors.useremail = 'User email is required.';
         } 
         else {
             const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-            if(!emailPattern.test(userEmail)) {
-                newErrors.userEmail = 'Please enter a valid email address.';
+            if(!emailPattern.test(useremail)) {
+                newErrors.useremail = 'Please enter a valid email address.';
             }
         }
-        if(userPassword === '') {
-            newErrors.userPassword = 'Password is required.';
-        }
-        else if(userPassword.length < 4) {
-            newErrors.userPassword = 'Password needs at least 4 characters.';
-        }
-        if(firstName === '') {
-            newErrors.firstName = 'First Name is required.';
-        }
-        if(lastName === '') {
-            newErrors.lastName = 'Last Name is required';
-        }
-
-        return newErrors;
     }
 
-    const addNewUser = async (e) => {
+    const handleAddNewUser = async (e) => {
         e.preventDefault();
-        
-        const errorValidation = formValidation();
-        if(Object.keys(errorValidation).length > 0) {
-            setErrors(errorValidation);
-            return;
-        }
-
-        setErrors({});
-
-        try {
-            const formData = new FormData();
-            formData.append('user_img', file);
-            formData.append('user_name', profileData.userName);
-            formData.append('user_email', profileData.userEmail);
-            formData.append('user_phone', profileData.userPhone);
-            formData.append('password', profileData.userPassword);
-            formData.append('firstname', profileData.firstName);
-            formData.append('lastname', profileData.lastName);
-            formData.append('address', profileData.userAddress);
-            formData.append('state', profileData.userState);
-            formData.append('country', profileData.userCountry);
-
-            const response = await axios.post('http://localhost:8030/users/add-user', formData, {
-                headers: {
-                    "Content-Type": 'multipart/form-data'
-                }
-            });
-
-            console.log('Response:', response);
-
-            setProfileData({
-                user_name: '',
-                user_email: '',
-                user_phone: '',
-                password: '',
-                firstname: '',
-                lastname: '',
-                address: '',
-                state: '',
-                country: '',
-            });
-            setFile(null);
-
-            alert('New User Added Successfully.');
-        } catch(error) {
-            console.log('Error:', error);
-        }
     }
 
     return (
@@ -122,7 +69,7 @@ const NewDashboardUser = ({ inputs, title }) => {
                 <div className='new_user_top'>
                     <div style={{ display: 'flex', flexDirection: 'column', margin: '0px' }}>
                         <p>{title}</p>
-                        <p className='required_field'>"<span>*</span>" indicates required fields</p>
+                        <p className='required_field'><span>"*"</span> Indicates required fields.</p>
                     </div>
                 </div>
                 <div className='new_user_bottom'>
@@ -130,10 +77,11 @@ const NewDashboardUser = ({ inputs, title }) => {
                         <img src={file ? URL.createObjectURL(file) : 'https://us.123rf.com/450wm/urfandadashov/urfandadashov1806/urfandadashov180601827/150417827-photo-not-available-vector-icon-isolated-on-transparent-background-photo-not-available-logo-concept.jpg?ver=6'} alt='' />
                     </div>
                     <div className='user_bottom_right'>
-                        <form onSubmit={addNewUser}>
+                        <form onSubmit={handleAddNewUser}>
                             <div className='form_input'>
-                                <label htmlFor='file'>
-                                    Image: <DriveFolderUploadOutlinedIcon sx={{ cursor: 'pointer' }} />
+                                <label htmlFor='file' 
+                                    style={{ fontSize: '13px', color: '#6439FF', marginLeft: '16px' }}>
+                                    <span style={{ color: '#C42B1C' }}>*</span>Image: <DriveFolderUploadOutlinedIcon sx={{ cursor: 'pointer', fontSize: '18px' }} titleAccess='Choose file' />
                                 </label>
                                 <input 
                                     type='file' 
@@ -142,28 +90,37 @@ const NewDashboardUser = ({ inputs, title }) => {
                                     style={{ display: 'none' }} />
                             </div>
                             {inputs.map((item, index) => {
-                                return(
-                                    <div className='form_input' key={index}>
-                                        <label>{item.label}</label>
-                                        <input 
-                                            id={item.id} 
-                                            type={item.type} 
-                                            name={item.name}
-                                            placeholder={item.placeholder} 
-                                            value={profileData[item.name] || ''} 
-                                            onChange={handleProfileChange} 
-                                            autoComplete='off' />
-                                        {errors[item.name] && <span className='required_msg'>{errors[item.name]}</span>}
+                                return (
+                                    <div className='form_input' key={index} 
+                                        style={{ marginBottom: '4px' }}>
+                                        <fieldset style={{ textAlign: 'left', border: 'none' }}>
+                                            <legend style={{ fontSize: '13px', color: '#6439FF' }}>
+                                                {item.required === 1 ? (
+                                                    <><span style={{ color: '#C42B1C' }}>*</span> {item.label}</>
+                                                ) : (
+                                                    <>{item.label}</>
+                                                )}
+                                            </legend>
+                                            <input 
+                                                id={item.id} 
+                                                type={item.type} 
+                                                name={item.name} 
+                                                placeholder={item.placeholder} 
+                                                value={addProfile[item.name] || ''} 
+                                                onChange={handleInfoChange} 
+                                                autoComplete='off' />
+                                        </fieldset>
                                     </div>
                                 )
                             })}
-
-                            <button 
-                                disabled='' 
-                                className='form_btn' 
-                                type='submit'>
-                                Add User
-                            </button>
+                            <div style={{ display: 'flex', marginLeft: '10%' }}>
+                                <button 
+                                    disabled='' 
+                                    className='form_btn'>
+                                    Add User
+                                </button>
+                            </div>
+                            
                         </form>
                     </div>
                 </div>

@@ -252,12 +252,12 @@ input::placeholder {
 
 .user_bottom_right form {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+    flex-direction: column;
 }
 
 .form_input {
     width: 40%;
+    margin-bottom: 16px;
 }
 
 .form_input label {
@@ -269,10 +269,10 @@ input::placeholder {
 
 .form_input input {
     width: 100%;
-    padding: 5px;
+    padding: 5px 8px;
     border: none;
     outline: none;
-    border-bottom: 1px solid #bbbaba;
+    border: 1px solid #bfb1f5;
     margin-top: 5px;
 }
 
