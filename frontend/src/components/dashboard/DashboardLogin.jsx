@@ -22,7 +22,6 @@ const DashboardLogin = () => {
             ...prevState, 
             [name]: value
         }));
-        console.log('User:', loginForm);
     }
 
     const formValidation = () => {

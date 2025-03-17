@@ -7,6 +7,7 @@ import BorderStyleIcon from '@mui/icons-material/BorderStyle';
 import DeliveryDiningOutlinedIcon from '@mui/icons-material/DeliveryDiningOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import SportsBasketballIcon from '@mui/icons-material/SportsBasketball';
 
 const DashboardSidebar = () => {
   return (
@@ -37,6 +38,12 @@ const DashboardSidebar = () => {
             <li>
               <PersonOutlineOutlinedIcon sx={{ fontSize: '18px', color: '#6439ff' }} />
               <span>Users</span>
+            </li>
+          </Link>
+          <Link to='/nets'>
+            <li>
+              <SportsBasketballIcon sx={{ fontSize: '18px', color: '#E75929', backgroundColor: '#000000', borderRadius: '50%' }} />
+              <span>Nets</span>
             </li>
           </Link>
           <Link to='/products'>

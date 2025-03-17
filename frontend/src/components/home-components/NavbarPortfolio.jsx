@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import shamim from '../../images/shamim.png';
+import logo from '../../images/logo.png';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { Link } from 'react-router-dom'
@@ -21,7 +21,7 @@ const NavbarPortfolio = () => {
             <div style={{ width: '100px'}}>
                 <Link to='/'>
                     <img 
-                        src={shamim} 
+                        src={logo} 
                         alt='logo' 
                         className='portfolio_logo' />
                 </Link>

@@ -134,4 +134,118 @@ export const profileInformation = [
         title: 'Country:',
         key: 'country'
     }
-]
+];
+
+export const netsAveTitle = [
+    {
+        id: 1,
+        title: 'Player ID'
+    },
+    {
+        id: 2,
+        title: 'First Name'
+    },
+    {
+        id: 3,
+        title: 'Last Name'
+    },
+    {
+        id: 4,
+        title: 'Position'
+    },
+    {
+        id: 5,
+        title: 'Average'
+    },
+    {
+        id: 6,
+        title: 'Total'
+    },
+    {
+        id: 8,
+        title: 'Action'
+    }
+];
+
+export const playerInputs = [
+    {
+        id: 'pid',
+        label: 'Player ID',
+        type: 'text',
+        name: 'pid',
+        placeholder: 'Player ID',
+        required: 1
+    },
+    {
+        id: 'firstname',
+        label: 'First Name',
+        type: 'text',
+        name: 'firstname',
+        placeholder: 'First Name',
+        required: 1
+    },
+    {
+        id: 'lastname',
+        label: 'Last Name',
+        type: 'text',
+        name: 'lastname',
+        placeholder: 'Last Name',
+        required: 1
+    },
+    {
+        id: 'pos',
+        label: 'Position',
+        type: 'text',
+        name: 'pos',
+        placeholder: 'Position',
+        required: 1
+    },
+    {
+        id: 'ast',
+        label: 'Assists',
+        type: 'text',
+        name: 'ast',
+        placeholder: 'Assists',
+        required: 1
+    },
+    {
+        id: 'blk',
+        label: 'Blocks',
+        type: 'text',
+        name: 'blk',
+        placeholder: 'Blocks',
+        required: 1
+    },
+    {
+        id: 'min',
+        label: 'Minutes',
+        type: 'text',
+        name: 'min',
+        placeholder: 'Minutes',
+        required: 1
+    },
+    {
+        id: 'pts',
+        label: 'Points',
+        type: 'text',
+        name: 'pts',
+        placeholder: 'Points',
+        required: 1
+    },
+    {
+        id: 'stl',
+        label: 'Steals',
+        type: 'text',
+        name: 'stl',
+        placeholder: 'Steals',
+        required: 0
+    },
+    {
+        id: 'tov',
+        label: 'Turnovers',
+        type: 'text',
+        name: 'tov',
+        placeholder: 'Turnovers',
+        required: 0
+    }
+];

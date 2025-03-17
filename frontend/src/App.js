@@ -13,10 +13,12 @@ import DashboardRegister from './components/dashboard/DashboardRegister';
 import Dashboard from './components/dashboard/Dashboard';
 import UserProvider, { UserContext } from './context/UserContext';
 import NewDashboardUser from './components/dashboard/NewDashboardUser';
-import { userInputs } from './json-data/formsData';
+import { playerInputs, userInputs } from './json-data/formsData';
 import UsersAllView from './components/users/UsersAllView';
 import UsersProfile from './components/users/UsersProfile';
 import { useContext } from 'react';
+import NetsPlayerViewComponent from './components/nets/NetsPlayerViewComponent';
+import AddNewPlayerComponent from './components/nets/AddNewPlayerComponent';
 // import QuarterlyProgressReport from './quarterly-progress/QuarterlyProgressReport';
 // import ClockInClockOut from './ClockInClockOut';
 // import PracticeFetchTableData from './practice-test/PracticeFetchTableData';
@@ -55,6 +57,19 @@ function App() {
                   <UsersAllView />
                 </PrivateRoute>
               } />
+
+              <Route path='/nets' element={
+                <PrivateRoute>
+                  <NetsPlayerViewComponent />
+                </PrivateRoute>
+              } />
+
+              <Route path='/add-player' element={
+                <PrivateRoute>
+                  <AddNewPlayerComponent inputs={playerInputs} title='Add New Player' />
+                </PrivateRoute>
+              } />
+
               <Route path='/profile/:userID' element={
                 <PrivateRoute>
                   <UsersProfile />
@@ -70,7 +85,7 @@ function App() {
 
 const ConditionalNavbar = () => {
   const location = useLocation();
-  const hideNavbarPaths = [ '/dashboard', '/login', '/register', '/add-user', '/users', '/profile/:userID'];
+  const hideNavbarPaths = [ '/dashboard', '/login', '/register', '/add-user', '/users', '/nets', '/add-player', '/profile/:userID'];
 
   const shouldShowNavbar = !hideNavbarPaths.some(path => matchPath(path, location.pathname));
 

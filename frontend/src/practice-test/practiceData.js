@@ -446,5 +446,78 @@ export const jsonData = [
       "bs": "target end-to-end models"
     }
   }
-]
-  
+];
+
+export const netsTitle = [
+  {
+    id: 1,
+    title: 'First Name'
+  },
+  {
+    id: 2,
+    title: 'Last Name'
+  },
+  {
+    id: 3,
+    title: 'Number'
+  },
+  {
+    id: 4,
+    title: 'Position'
+  },
+  {
+    id: 5,
+    title: 'Date of Birth'
+  },
+  {
+    id: 6,
+    title: 'Height'
+  },
+  {
+    id: 7,
+    title: 'Weight'
+  },
+  {
+    id: 8,
+    title: 'TWC'
+  },
+  {
+    id: 9,
+    title: 'HCC'
+  },
+  {
+    id: 10,
+    title: 'Action'
+  }
+];
+
+export const playerTitle = [
+  {
+    id: 1,
+    title: 'Player ID'
+  },
+  {
+    id: 2,
+    title: 'First Name'
+  },
+  {
+    id: 3,
+    title: 'Last Name'
+  },
+  {
+    id: 4,
+    title: 'Position'
+  },
+  {
+    id: 5,
+    title: 'Average'
+  },
+  {
+    id: 6,
+    title: 'Total'
+  },
+  {
+    id: 7,
+    title: 'Action'
+  }
+];

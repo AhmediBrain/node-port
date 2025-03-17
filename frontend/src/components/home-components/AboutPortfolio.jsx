@@ -1,5 +1,6 @@
 import React from 'react';
-import TestProjectsComponent from '../../practice-test/test-projects/TestProjectsComponent';
+import ProjectsHomeComponent from '../../practice-test/practice-projects/ProjectsHomeComponent';
+//import TestProjectsComponent from '../../practice-test/test-projects/TestProjectsComponent';
 //import ProjectHomeComponent from '../../practice-test/project-practice/ProjectHomeComponent';
 //import BasicHomeComponent from '../../practice-test/BasicHomeComponent'
 
@@ -9,7 +10,8 @@ const AboutPortfolio = () => {
     <div className='home_container'>
       {/* <BasicHomeComponent /> */}
       {/* <ProjectHomeComponent /> */}
-      <TestProjectsComponent />
+      {/* <TestProjectsComponent /> */}
+      <ProjectsHomeComponent />
     </div>
   );
 }
