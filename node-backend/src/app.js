@@ -3,6 +3,7 @@ const cors = require('cors');
 const path = require('path');
 
 const userRoutes = require('./routes/userRoutes');
+const teamsRoutes = require('./routes/teamsRoutes');
 
 const app = express();
 
@@ -17,5 +18,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/users', userRoutes);
+app.use('/teams', teamsRoutes);
+app.use('/nets-team', teamsRoutes);
+console.log('Teams:', teamsRoutes);
 
 module.exports = app;
