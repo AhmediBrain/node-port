@@ -20,6 +20,5 @@ app.get('/', (req, res) => {
 app.use('/users', userRoutes);
 app.use('/teams', teamsRoutes);
 app.use('/nets-team', teamsRoutes);
-console.log('Teams:', teamsRoutes);
 
 module.exports = app;
