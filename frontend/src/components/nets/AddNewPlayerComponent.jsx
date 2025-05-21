@@ -21,7 +21,7 @@ const AddNewPlayerComponent = ({ inputs, title }) => {
         }
     );
 
-    const [errors, setErrors] = useState({});
+    const [ errors, setErrors ] = useState({});
 
     const handleInfoChange = (e) => {
         const { name, value } = e.target;
@@ -56,26 +56,25 @@ const AddNewPlayerComponent = ({ inputs, title }) => {
         }
 
         if(pos === '') {
-            newErrors.pos = 'Position is required.';
+            newErrors.pos = 'Position record is required.';
         }
 
         if(ast === '') {
-            newErrors.ast = 'Assits is required.';
+            newErrors.ast = 'Assists record is required.';
         }
 
         if(blk === '') {
-            newErrors.blk = 'Blocks is required.';
+            newErrors.blk = 'Blocks record is required.';
         }
 
         if(min === '') {
-            newErrors.min = 'Minutes is required.';
+            newErrors.min = 'Minutes record is required.';
         }
 
         if(pts === '') {
-            newErrors.pts = 'Points is required.';
+            newErrors.pts = 'Points record is required.';
         }
-        
-        console.log('New Errors: ', newErrors);
+
         return newErrors;
     }
 
@@ -83,15 +82,15 @@ const AddNewPlayerComponent = ({ inputs, title }) => {
         e.preventDefault();
 
         const errorValidation = formValidation();
+
         if(Object.keys(errorValidation).length > 0) {
             setErrors(errorValidation);
             return;
         }
 
-        setErrors({});
-
         try {
             const formData = new FormData();
+
             formData.append('player_img', file);
             formData.append('pid', addPlayer.pid);
             formData.append('firstname', addPlayer.firstname);
@@ -104,30 +103,30 @@ const AddNewPlayerComponent = ({ inputs, title }) => {
             formData.append('steals', addPlayer.stl);
             formData.append('turnover', addPlayer.tov);
 
-            await axios.post('http://localhost:8030/nets-team/add-player', formData, {
+            await axios.post('http://localhost:8030/teams/add-player', formData, {
                 headers: {
                     "Content-Type": 'multipart/form-data'
                 }
             });
 
-            alert('Nets new player added successfully.');
+            alert('New player added successfully.');
 
-            // setFile(null);
+            setFile(null);
 
-            // setAddPlayer(
-            //     {
-            //         pid: '',
-            //         firstname: '',
-            //         lastname: '',
-            //         pos: '',
-            //         ast: '',
-            //         blk: '',
-            //         min: '',
-            //         pts: '',
-            //         stl: '',
-            //         tov: ''
-            //     }
-            // );
+            setAddPlayer(
+                {
+                    pid: '',
+                    firstname: '',
+                    lastname: '',
+                    pos: '',
+                    ast: '',
+                    blk: '',
+                    min: '',
+                    pts: '',
+                    stl: '',
+                    tov: ''
+                }
+            );
 
         } catch(error) {
             console.error('Error:', error);
@@ -142,48 +141,51 @@ const AddNewPlayerComponent = ({ inputs, title }) => {
                 <div className='new_user_top'>
                     <p>{title}</p>
                 </div>
+
                 <form onSubmit={handleAddPlayer}>
                     <div className='new_user_bottom'>
-                        <div>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
                             <img className='file_img' 
                                 src={file ? URL.createObjectURL(file) : 'https://us.123rf.com/450wm/urfandadashov/urfandadashov1806/urfandadashov180601827/150417827-photo-not-available-vector-icon-isolated-on-transparent-background-photo-not-available-logo-concept.jpg?ver=6'} 
                                 alt='' />
-                            <div>
-                                <label htmlFor='file'>
-                                    <span style={{ color: '#f11e0e' }}>*</span> <DriveFolderUploadOutlinedIcon sx={{ color: '#EF7B14', fontSize: '20px', cursor: 'pointer' }} titleAccess='Choose File' />
-                                </label>
-                                <input 
-                                    type='file' 
-                                    id='file' 
-                                    onChange={(e) => setFile(e.target.files[0])} 
-                                    style={{ display: 'none' }} />
-                            </div>
+                            <label htmlFor='file'>
+                                <span style={{ color: '#C42B1C' }}>*</span> <DriveFolderUploadOutlinedIcon sx={{ color: '#6439FF', fontSize: '20px', cursor: 'pointer' }} titleAccess='Choose File' />
+                            </label>
+                            <input 
+                                type='file' 
+                                id='file' 
+                                onChange={(e) => setFile(e.target.files[0])} 
+                                style={{ display: 'none' }} />
                             {errors.file && <span className='required_msg'>{errors.file}</span>}
                         </div>
 
                         <div>
-                            {inputs.map((user) => {
+                            {inputs.map((user, index) => {
                                 return (
-                                    <fieldset key={user.id} 
+                                    <fieldset key={index} 
                                         style={{ textAlign: 'left', marginBottom: '5px' }}>
-                                        <legend style={{ fontSize: '13px', color: '#14829B' }}>
+                                        <legend 
+                                            style={{ fontSize: '13px', color: '#8875cc' }}>
                                             {user.required === 1 ? (
-                                                <><span style={{ color: '#f11e0e' }}>*</span>{user.label}</>
+                                                <><span style={{ color: '#C42B1C' }}>*</span>{user.label}</>
                                             ) : (
                                                 <>{user.label}</>
                                             )}
                                         </legend>
                                         <input 
+                                            id={user.id}
                                             type={user.type} 
                                             name={user.name} 
                                             placeholder={user.placeholder} 
+                                            className='info_input' 
+                                            autoComplete='off' 
                                             value={addPlayer[user.name]} 
-                                            onChange={handleInfoChange} 
-                                            className='info_input' />
+                                            onChange={handleInfoChange} />
+                                        {errors[user.name] && <span className='required_msg'>{errors[user.name]}</span>}
                                     </fieldset>
                                 )
                             })}
-                            <div style={{ margin: '16px' }}>
+                            <div>
                                 <button 
                                     type='submit' 
                                     className='player_btn'>

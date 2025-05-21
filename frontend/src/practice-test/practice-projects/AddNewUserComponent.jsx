@@ -19,11 +19,12 @@ const AddNewUserComponent = () => {
             }
         }
     );
-    
+
     const [users, setUsers] = useState([]);
     const [searchText, setSearchText] = useState('');
     const [editID, setEditID] = useState(null);
     const [editUser, setEditUser] = useState('');
+    const [filteredUser, setFilteredUser] = useState([]);
 
     const handleInfoChange = (e) => {
         const { name, value } = e.target;
@@ -46,7 +47,7 @@ const AddNewUserComponent = () => {
         }
     }
 
-    const handleAddNewUser = () => {
+    const handleNewUser = () => {
         if(!addNew.firstname || !addNew.lastname || !addNew.username || !addNew.email) {
             alert('Please fill all the required fields.');
             return;
@@ -75,18 +76,32 @@ const AddNewUserComponent = () => {
         );
     }
 
-    console.log('New User:', addNew);
-
-    const handleSearchChange = (e) => {
+    const handleSearchText = (e) => {
         const searchValue = e.target.value.toLowerCase();
         setSearchText(searchValue);
+
+        const filteredValue = users.filter(
+            (user) => 
+                user.firstname.toLowerCase().includes(searchValue) || 
+                user.lastname.toLowerCase().includes(searchValue) || 
+                user.username.toLowerCase().includes(searchValue)
+        );
+
+        setFilteredUser(filteredValue);
+    }
+
+    const handleReset = () => {
+        setSearchText('');
+        setFilteredUser(users);
     }
 
     const handleDeleteUser = (id) => {
         const updatedUser = users.filter((user) => user.id !== id);
         setUsers(updatedUser);
-    }
 
+        setFilteredUser(filteredUser.filter((user) => user.id !== id));
+    }
+    
     const handleSaveUser = (id) => {
         const savedValue = users.map(
             (user) => 
@@ -103,103 +118,101 @@ const AddNewUserComponent = () => {
     }
 
     return (
-        <div style={{ backgroundColor: '#f5f0f7' }}>
-            <h4 style={{ color: '#974eac' }}>Add New User</h4>
-            <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
-                <fieldset style={{ border: 'none', textAlign: 'left' }}>
-                    <legend style={{ fontSize: '13px', color: '#974eac' }}>First Name</legend>
+        <div>
+            <h5 style={{ color: '#9763A6' }}>New User Component</h5>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <fieldset style={{ textAlign: 'left', border: 'none' }}>
+                    <legend style={{ fontSize: '13px', color: '#9763A6' }}>First Name</legend>
                     <input 
                         type='text' 
-                        name='firstname' 
+                        name='firstname'
                         value={addNew.firstname} 
                         onChange={handleInfoChange} 
-                        style={{ border: '1px solid #e6acf7', outline: 'none', padding: '5px 8px' }} />
+                        style={{ border: '1px solid #ceb0d6', outline: 'none', padding: '5px 8px' }} />
                 </fieldset>
-                <fieldset style={{ border: 'none', textAlign: 'left' }}>
-                    <legend style={{ fontSize: '13px', color: '#974eac' }}>Last Name</legend>
+                <fieldset style={{ textAlign: 'left', border: 'none' }}>
+                    <legend style={{ fontSize: '13px', color: '#9763A6' }}>Last Name</legend>
                     <input 
                         type='text' 
-                        name='lastname' 
+                        name='lastname'
                         value={addNew.lastname} 
                         onChange={handleInfoChange} 
-                        style={{ border: '1px solid #e6acf7', outline: 'none', padding: '5px 8px' }} />
+                        style={{ border: '1px solid #ceb0d6', outline: 'none', padding: '5px 8px' }} />
                 </fieldset>
-                <fieldset style={{ border: 'none', textAlign: 'left' }}>
-                    <legend style={{ fontSize: '13px', color: '#974eac' }}>User Name</legend>
+                <fieldset style={{ textAlign: 'left', border: 'none' }}>
+                    <legend style={{ fontSize: '13px', color: '#9763A6' }}>Username</legend>
                     <input 
                         type='text' 
-                        name='username' 
+                        name='username'
                         value={addNew.username} 
                         onChange={handleInfoChange} 
-                        style={{ border: '1px solid #e6acf7', outline: 'none', padding: '5px 8px' }} />
+                        style={{ border: '1px solid #ceb0d6', outline: 'none', padding: '5px 8px' }} />
                 </fieldset>
-                <fieldset style={{ border: 'none', textAlign: 'left' }}>
-                    <legend style={{ fontSize: '13px', color: '#974eac' }}>Email</legend>
+                <fieldset style={{ textAlign: 'left', border: 'none' }}>
+                    <legend style={{ fontSize: '13px', color: '#9763A6' }}>Email</legend>
                     <input 
-                        type='text' 
-                        name='email' 
+                        type='email' 
+                        name='email'
                         value={addNew.email} 
                         onChange={handleInfoChange} 
-                        style={{ border: '1px solid #e6acf7', outline: 'none', padding: '5px 8px' }} />
+                        style={{ border: '1px solid #ceb0d6', outline: 'none', padding: '5px 8px' }} />
                 </fieldset>
-                <fieldset style={{ border: 'none', textAlign: 'left' }}>
-                    <legend style={{ fontSize: '13px', color: '#974eac' }}>Street</legend>
+                <fieldset style={{ textAlign: 'left', border: 'none' }}>
+                    <legend style={{ fontSize: '13px', color: '#9763A6' }}>Street</legend>
                     <input 
                         type='text' 
-                        name='address.street' 
+                        name='address.street'
                         value={addNew.address.street} 
                         onChange={handleInfoChange} 
-                        style={{ border: '1px solid #e6acf7', outline: 'none', padding: '5px 8px' }} />
+                        style={{ border: '1px solid #ceb0d6', outline: 'none', padding: '5px 8px' }} />
                 </fieldset>
-                <fieldset style={{ border: 'none', textAlign: 'left' }}>
-                    <legend style={{ fontSize: '13px', color: '#974eac' }}>Suite</legend>
+                <fieldset style={{ textAlign: 'left', border: 'none' }}>
+                    <legend style={{ fontSize: '13px', color: '#9763A6' }}>Suite</legend>
                     <input 
                         type='text' 
-                        name='address.suite' 
+                        name='address.suite'
                         value={addNew.address.suite} 
                         onChange={handleInfoChange} 
-                        style={{ border: '1px solid #e6acf7', outline: 'none', padding: '5px 8px' }} />
+                        style={{ border: '1px solid #ceb0d6', outline: 'none', padding: '5px 8px' }} />
                 </fieldset>
-                <fieldset style={{ border: 'none', textAlign: 'left' }}>
-                    <legend style={{ fontSize: '13px', color: '#974eac' }}>City</legend>
+                <fieldset style={{ textAlign: 'left', border: 'none' }}>
+                    <legend style={{ fontSize: '13px', color: '#9763A6' }}>City</legend>
                     <input 
                         type='text' 
-                        name='address.city' 
+                        name='address.city'
                         value={addNew.address.city} 
                         onChange={handleInfoChange} 
-                        style={{ border: '1px solid #e6acf7', outline: 'none', padding: '5px 8px' }} />
+                        style={{ border: '1px solid #ceb0d6', outline: 'none', padding: '5px 8px' }} />
                 </fieldset>
-                <fieldset style={{ border: 'none', textAlign: 'left' }}>
-                    <legend style={{ fontSize: '13px', color: '#974eac' }}>Zip Code</legend>
+                <fieldset style={{ textAlign: 'left', border: 'none' }}>
+                    <legend style={{ fontSize: '13px', color: '#9763A6' }}>Zip Code</legend>
                     <input 
                         type='text' 
-                        name='address.zipcode' 
+                        name='address.zipcode'
                         value={addNew.address.zipcode} 
                         onChange={handleInfoChange} 
-                        style={{ border: '1px solid #e6acf7', outline: 'none', padding: '5px 8px' }} />
+                        style={{ border: '1px solid #ceb0d6', outline: 'none', padding: '5px 8px' }} />
                 </fieldset>
             </div>
-            <div style={{ margin: '10px' }}>
+            <div style={{ margin: '10px 0px' }}>
                 <button 
-                    style={{ border: '2px solid #c3adca', color: '#9763A6', fontWeight: 'bold', borderRadius: '5px', padding: '5px 8px', cursor: 'pointer' }} 
-                    onClick={handleAddNewUser}>
+                    style={{ border: '2px solid #9763A6', color: '#9763A6', fontWeight: 'bold', borderRadius: '5px', padding: '5px 8px', cursor: 'pointer' }} 
+                    onClick={handleNewUser}>
                     Add User
                 </button>
             </div>
 
-            <div style={{ marginTop: '20px' }}>
-                <div>
-                    <h5 style={{ color: '#974eac' }}>User's Information</h5>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1%', margin: '0 10px 10px 0' }}>
+            <div style={{ border: '1px solid #ceb0d6', padding: '10px', margin: '16px 0px' }}>
+                <h5 style={{ margin: '0px', color: '#9763A6' }}>User's Information</h5>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '10px', gap: '1%' }}>
                     <input 
                         type='text' 
                         value={searchText} 
-                        onChange={handleSearchChange} 
-                        style={{ border: '1px solid #e6acf7', outline: 'none', padding: '5px 8px' }} 
-                        placeholder='Search ...' />
+                        onChange={handleSearchText}
+                        style={{ border: '1px solid #ceb0d6', outline: 'none', padding: '5px 8px' }} />
                     <button 
-                        style={{ border: '2px solid #EEA024', color: '#EEA024', fontWeight: 'bold', borderRadius: '5px', cursor: 'pointer' }}>
+                        style={{ border: '2px solid #E96725', color: '#E96725', fontWeight: 'bold', borderRadius: '5px', cursor: 'pointer' }} 
+                        onClick={handleReset}>
                         Reset
                     </button>
                 </div>
@@ -210,7 +223,7 @@ const AddNewUserComponent = () => {
                                 {usersTitle.map((user) => {
                                     return (
                                         <th key={user.id} 
-                                            style={{ padding: '8px', color: '#b79ebe' }}>
+                                            style={{ padding: '5px' }}>
                                             {user.title}
                                         </th>
                                     )
@@ -219,56 +232,60 @@ const AddNewUserComponent = () => {
                         </thead>
 
                         <tbody>
-                            {users.map((user) => {
+                            {(searchText ? filteredUser : users).map((user) => {
                                 const { street, suite, city, zipcode } = user.address;
+
                                 return (
                                     <tr key={user.id}>
-                                        <td style={{ fontSize: '13px', color: '#9763A6' }}>{user.firstname}</td>
-                                        <td style={{ fontSize: '13px', color: '#9763A6' }}>{user.lastname}</td>
-                                        <td style={{ fontSize: '13px', color: '#9763A6' }}>
+                                        <td style={{ fontSize: '14px', color: '#9763A6' }}>{user.firstname}</td>
+                                        <td style={{ fontSize: '14px', color: '#9763A6' }}>{user.lastname}</td>
+                                        <td style={{ fontSize: '14px', color: '#9763A6' }}>
                                             {editID === user.id ? (
                                                 <input 
                                                     type='text' 
                                                     value={editUser} 
                                                     onChange={(e) => setEditUser(e.target.value)} 
-                                                    style={{ border: '1px solid #e6acf7', outline: 'none', padding: '5px 8px' }} />
+                                                    style={{ border: '1px solid #ceb0d6', outline: 'none', padding: '5px 8px' }} />
                                             ) : (
-                                                <span>{user.username}</span>
+                                                <>{user.username}</>
                                             )}
                                         </td>
-                                        <td style={{ fontSize: '13px', color: '#9763A6' }}>{user.email}</td>
+                                        <td style={{ fontSize: '14px', color: '#9763A6' }}>{user.email}</td>
                                         <td>
-                                            <span style={{ color: '#9763A6', fontSize: '10px' }}><span style={{ fontWeight: 'bold' }}>Street: </span>{street}</span>
+                                            <span style={{ fontSize: '10px', color: '#9763A6' }}><span style={{ fontWeight: 'bold' }}>Street: </span>{street}</span>
                                             <br />
-                                            <span style={{ color: '#9763A6', fontSize: '10px' }}><span style={{ fontWeight: 'bold' }}>Suite: </span>{suite}</span>
+                                            <span style={{ fontSize: '10px', color: '#9763A6' }}><span style={{ fontWeight: 'bold' }}>Suite: </span>{suite}</span>
                                             <br />
-                                            <span style={{ color: '#9763A6', fontSize: '10px' }}><span style={{ fontWeight: 'bold' }}>City: </span>{city}</span>
+                                            <span style={{ fontSize: '10px', color: '#9763A6' }}><span style={{ fontWeight: 'bold' }}>City: </span>{city}</span>
                                             <br />
-                                            <span style={{ color: '#9763A6', fontSize: '10px' }}><span style={{ fontWeight: 'bold' }}>Zip Code: </span>{zipcode}</span>
+                                            <span style={{ fontSize: '10px', color: '#9763A6' }}><span style={{ fontWeight: 'bold' }}>Zip Code: </span>{zipcode}</span>
                                         </td>
                                         <td>
-                                            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                                            <div style={{ display: 'flex', gap: '1%', justifyContent: 'space-around' }}>
                                                 <button 
-                                                    style={{ background: 'transparent', border: 'none', padding: '0px', cursor: 'pointer' }} 
+                                                    style={{ border: 'none', background: 'transparent', padding: '0px', cursor: 'pointer' }} 
                                                     onClick={() => handleDeleteUser(user.id)}>
                                                     <HighlightOffOutlinedIcon 
                                                         sx={{ color: '#C42B1C' }} 
                                                         titleAccess='Delete' />
                                                 </button>
-                                                <button 
-                                                    style={{ background: 'transparent', border: 'none', padding: '0px', cursor: 'pointer' }} 
-                                                    onClick={() => handleSaveUser(user.id)}>
-                                                    <SaveOutlinedIcon 
-                                                        sx={{ color: '#289847' }} 
-                                                        titleAccess='Save' />
-                                                </button>
-                                                <button 
-                                                    style={{ background: 'transparent', border: 'none', padding: '0px', cursor: 'pointer' }} 
-                                                    onClick={() => handleEditUser(user.id, user.username)}>
-                                                    <AppRegistrationOutlinedIcon 
-                                                        sx={{ color: '#0079BA' }} 
-                                                        titleAccess='Edit' />
-                                                </button>
+                                                {editID === user.id ? (
+                                                    <button 
+                                                        style={{ border: 'none', background: 'transparent', padding: '0px', cursor: 'pointer' }} 
+                                                        onClick={() => handleSaveUser(user.id)}>
+                                                        <SaveOutlinedIcon 
+                                                            sx={{ color: '#13A10E' }} 
+                                                            titleAccess='Save' />
+                                                    </button>
+                                                ) : (
+                                                    <button 
+                                                        style={{ border: 'none', background: 'transparent', padding: '0px', cursor: 'pointer' }} 
+                                                        onClick={() => handleEditUser(user.id, user.username)}>
+                                                        <AppRegistrationOutlinedIcon 
+                                                            sx={{ color: '#0078B9' }} 
+                                                            titleAccess='Edit' />
+                                                    </button>
+                                                )}
                                             </div>
                                         </td>
                                     </tr>

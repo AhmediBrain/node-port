@@ -3,26 +3,22 @@
 export const usersTitle = [
     {
       id: 1,
-      title: 'First Name'
-    },
-    {
-      id: 2,
-      title: 'Last Name'
+      title: 'Full Name'
     },  
     {
-      id: 3,
+      id: 2,
       title: 'User Name'
     },
     {
-      id: 4,
+      id: 3,
       title: 'Email'
     },
     {
-      id: 5,
+      id: 4,
       title: 'Address'
     },
     {
-      id: 7,
+      id: 5,
       title: 'Action'
     }
 ];
@@ -57,7 +53,7 @@ export const initialUsersData = [
     "id": 2,
     "name": "Ervin Howell",
     "username": "Antonette",
-    "email": "Shanna@melissa.tv",
+    "email": "shanna@melissa.tv",
     "address": {
       "street": "Victor Plains",
       "suite": "Suite 879",
@@ -521,3 +517,27 @@ export const playerTitle = [
     title: 'Action'
   }
 ];
+
+export const scheduleData = {
+  student: "Omari Carew",
+  assignedPara: "Derek",
+  timings: ["8:30 AM - 9:00 AM", "9:00 AM - 9:30 AM", "9:30 AM - 10:00 AM", "10:00 AM - 11:00 AM", "11:00 AM - 11:30 AM", "11:30 AM - 12:00 PM", "12:00 PM - 1:00 PM", "1:00 PM - 1:30 PM", "1:30 PM - 2:00 PM", "2:00 PM - 2:30 PM", "2:30 PM - 3:00 PM", "3:00 PM - 3:30 PM", "3:30 PM - 4:00 PM"],
+  days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  schedule: {
+    Monday: ["ADLS", "Speech", "Vision (Zoom)", "Academics", "PT", "Literacy", "OT", "ADLS/Dismissal"],
+    Tuesday: ["ADLS", "MT/Speech", "Sensory Time", "Academics/Yoga @ 11:30", "PT", "Literacy", "OT", "ADLS/Dismissal"],
+    Wednesday: ["ADLS", "Speech", "AT", "Vision/Academics", "LUNCH", "Literacy", "OT", "ADLS/Dismissal"],
+    Thursday: ["ADLS", "Speech", "MT", "Academics", "MT/PT", "Vision (Zoom)", "OT", "ADLS/Dismissal"],
+    Friday: ["ADLS", "Speech", "MT", "Academics", "Literacy", "OT", "ADLS/Dismissal"],
+  },
+  extraNotes: {
+    feedingTimes: ["9:30 AM", "2:30 PM"],
+    therapies: [
+      { type: "Speech", duration: "5x60", therapist: "Oisin Geneva, Teacher" },
+      { type: "PT", duration: "5x60", therapist: "Krishika Neter, Yoga" },
+      { type: "Vision", duration: "3x60", therapist: "Bridget" },
+      { type: "AT", duration: "1x60", therapist: "Eileen" },
+      { type: "MT", therapist: "Sonia" },
+    ],
+  },
+};

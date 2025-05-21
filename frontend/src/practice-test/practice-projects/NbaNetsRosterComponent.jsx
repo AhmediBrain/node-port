@@ -5,100 +5,86 @@ import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import AppRegistrationOutlinedIcon from '@mui/icons-material/AppRegistrationOutlined';
 
 const NbaNetsRosterComponent = () => {
-    const [players, setPlayers] = useState([]);
-    const [filteredPlayer, setFilteredPlayer] = useState([]);
     const [searchText, setSearchText] = useState('');
-    const [teamInfo, setTeamInfo] = useState({});
+    const [teams, setTeams] = useState([]);
     const [editID, setEditID] = useState(null);
-    const [editNum, setEditNum] = useState('');
+    const [editNumber, setEditNumber] = useState('');
+    const [filteredTeams, setFilteredTeams] = useState([]);
 
-    const netsUrl = 'https://data.nba.com/data/5s/v2015/json/mobile_teams/nba/2021/teams/nets_roster.json';
+    const teamsUrl = 'https://data.nba.com/data/5s/v2015/json/mobile_teams/nba/2021/teams/nets_roster.json';
 
     useEffect(() => {
-        fetch(netsUrl)
+        fetch(teamsUrl)
         .then((response) => response.json())
         .then((result) => {
-            setTeamInfo(result.t || {});
-            setPlayers(result.t?.pl || []);
-            setFilteredPlayer(result.t?.pl || []);
+            setTeams(result.t?.pl);
+            setFilteredTeams(result.t?.pl);
         });
     }, []);
 
-    const handleSearchChange = (e) => {
+    const handleSearchText = (e) => {
         const searchValue = e.target.value.toLowerCase();
         setSearchText(searchValue);
 
-        const filteredValue = filteredPlayer.filter(
-            (item) => 
-                item.fn.toLowerCase().includes(searchValue) || 
-                item.ln.toLowerCase().includes(searchValue) || 
-                item.num.toLowerCase().includes(searchValue)
+        const filteredValue = filteredTeams.filter(
+            (user) => 
+                user.fn.toLowerCase().includes(searchValue) || 
+                user.ln.toLowerCase().includes(searchValue)
         );
 
-        setPlayers(filteredValue);
+        setTeams(filteredValue);
     }
 
     const handleReset = () => {
         setSearchText('');
-        setPlayers(filteredPlayer);
+        setTeams(filteredTeams);
     }
 
     const handleDeletePlayer = (pid) => {
-        const updatedPlayer = players.filter((player) => player.pid !== pid);
-        setPlayers(updatedPlayer);
-        setFilteredPlayer(filteredPlayer.filter((player) => player.pid !== pid));
+        const updatedTeams = teams.filter((user) => user.pid !== pid);
+        setTeams(updatedTeams);
     }
 
     const handleSavePlayer = (pid) => {
-        const savedValue = players.map(
-            (player) => 
-                player.pid === pid ? { ...player, num: editNum } : player
+        const savedValue = teams.map(
+            (user) => 
+                user.pid === pid ? { ...user, num: editNumber } : user
         );
 
-        setPlayers(savedValue);
+        setTeams(savedValue);
         setEditID(null);
     }
 
-    const handleEditPlayer = (pid, currentNum) => {
+    const handleEditPlayer = (pid, currentNumber) => {
         setEditID(pid);
-        setEditNum(currentNum);
-    }
-
-    const handleNumberChange = (e) => {
-        setEditNum(e.target.value);
+        setEditNumber(currentNumber);
     }
 
     return (
-        <div style={{ backgroundColor: '#eceff8', padding: '2px' }}>
-            <h4 style={{ color: '#222944' }}>Nets Roster Information</h4>
-            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '2%', margin: '0 10px 16px 0' }}>
+        <div style={{ backgroundColor: '#ecedf3', padding: '8px' }}>
+            <h5 style={{ color: '#838eb8', margin: '0px' }}>Nets Player's Information</h5>
+            <div 
+                style={{ display: 'flex', justifyContent: 'flex-end', gap: '2%', margin: '10px 10px 0px 0px' }}>
                 <input 
                     type='text' 
                     value={searchText} 
-                    onChange={handleSearchChange} 
-                    style={{ border: '1px solid #95a8f3', outline: 'none', padding: '5px 8px' }} />
+                    onChange={handleSearchText}
+                    style={{ border: '1px solid #aebbf0', outline: 'none', padding: '5px 8px' }} />
                 <button 
-                    style={{ border: '2px solid #EA6523', borderRadius: '5px', color: '#EA6523', fontWeight: 'bold', cursor: 'pointer' }} 
+                    style={{ border: '2px solid #E96725', color: '#E96725', fontWeight: 'bold', borderRadius: '5px', cursor: 'pointer' }} 
                     onClick={handleReset}>
                     Reset
                 </button>
             </div>
-
-            <div style={{ border: '1px solid #95a8f3', padding: '8px', overflowX: 'auto' }}>
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <span style={{ fontSize: '13px', color: '#404c7c' }}><span style={{ fontWeight: 'bold' }}>Team ID# </span>{teamInfo.tid}</span>
-                    <span style={{ fontSize: '13px', color: '#404c7c' }}><span style={{ fontWeight: 'bold' }}>Abbreviation: </span>{teamInfo.ta}</span>
-                    <span style={{ fontSize: '13px', color: '#404c7c' }}><span style={{ fontWeight: 'bold' }}>Team Name: </span>{teamInfo.tn}</span>
-                    <span style={{ fontSize: '13px', color: '#404c7c' }}><span style={{ fontWeight: 'bold' }}>Team City: </span>{teamInfo.tc}</span>
-                </div>
-                <table style={{ marginTop: '10px', width: '100%' }}>
+            <div style={{ margin: '16px 0px', overflowX: 'auto' }}>
+                <table style={{ width: '100%' }}>
                     <thead>
                         <tr>
-                            {netsTitle.map((player) => {
+                            {netsTitle.map((user) => {
                                 return (
-                                    <th key={player.id} 
-                                        style={{ padding: '8px', color: '#5463a0' }}>
-                                        {player.title}
+                                    <th key={user.id} 
+                                        style={{ color: '#9face0', padding: '5px' }}>
+                                        {user.title === 'Action' ? <span style={{ fontSize: '10px' }}>{user.title}</span> : <span>{user.title}</span>}
                                     </th>
                                 )
                             })}
@@ -106,51 +92,51 @@ const NbaNetsRosterComponent = () => {
                     </thead>
 
                     <tbody>
-                        {players.map((player) => {
+                        {teams.map((user) => {
                             return (
-                                <tr key={player.pid}>
-                                    <td>{player.fn}</td>
-                                    <td>{player.ln}</td>
-                                    <td>
-                                        {editID === player.pid ? (
+                                <tr key={user.pid}>
+                                    <td style={{ color: '#7f8ab3', fontSize: '14px', padding: '5px' }}>{user.fn}</td>
+                                    <td style={{ color: '#7f8ab3', fontSize: '14px', padding: '5px' }}>{user.ln}</td>
+                                    <td style={{ color: '#7f8ab3', fontSize: '14px', padding: '5px' }}>
+                                        {editID === user.pid ? (
                                             <input 
                                                 type='text' 
-                                                value={editNum} 
-                                                onChange={handleNumberChange} 
-                                                style={{ border: '1px solid #95a8f3', outline: 'none', padding: '5px 8px' }} />
+                                                value={editNumber} 
+                                                onChange={(e) => setEditNumber(e.target.value)} 
+                                                style={{ border: '1px solid #aebbf0', outline: 'none', padding: '5px 8px' }} />
                                         ) : (
-                                            <>{player.num}</>
+                                            <>{user.num}</>
                                         )}
                                     </td>
-                                    <td>{player.pos}</td>
-                                    <td>{player.dob}</td>
-                                    <td>{player.ht}</td>
-                                    <td>{player.wt}</td>
-                                    <td>{player.twc}</td>
-                                    <td>{player.hcc}</td>
+                                    <td style={{ color: '#7f8ab3', fontSize: '14px', padding: '5px' }}>{user.pos}</td>
+                                    <td style={{ color: '#7f8ab3', fontSize: '14px', padding: '5px' }}>{user.dob}</td>
+                                    <td style={{ color: '#7f8ab3', fontSize: '14px', padding: '5px' }}>{user.ht}</td>
+                                    <td style={{ color: '#7f8ab3', fontSize: '14px', padding: '5px' }}>{user.wt}</td>
+                                    <td style={{ color: '#7f8ab3', fontSize: '14px', padding: '5px' }}>{user.twc}</td>
+                                    <td style={{ color: '#7f8ab3', fontSize: '14px', padding: '5px' }}>{user.hcc}</td>
                                     <td>
-                                        <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                                        <div style={{ display: 'flex', gap: '1%', justifyContent: 'space-between', padding: '5px' }}>
                                             <button 
-                                                style={{ border: 'none', padding: '0px', background: 'transparent', cursor: 'pointer' }} 
-                                                onClick={() => handleDeletePlayer(player.pid)}>
+                                                style={{ background: 'transparent', border: 'none', padding: '0px', cursor: 'pointer' }} 
+                                                onClick={() => handleDeletePlayer(user.pid)}>
                                                 <HighlightOffOutlinedIcon 
-                                                    sx={{ color: '#E43D30' }} 
+                                                    sx={{ color: '#C42B1C' }} 
                                                     titleAccess='Delete' />
                                             </button>
-                                            {editID === player.pid ? (
+                                            {editID === user.pid ? (
                                                 <button 
-                                                    style={{ border: 'none', padding: '0px', background: 'transparent', cursor: 'pointer' }} 
-                                                    onClick={() => handleSavePlayer(player.pid)}>
+                                                    style={{ background: 'transparent', border: 'none', padding: '0px', cursor: 'pointer' }} 
+                                                    onClick={() => handleSavePlayer(user.pid)}>
                                                     <SaveOutlinedIcon 
-                                                        sx={{ color: '#299B48' }} 
+                                                        sx={{ color: '#13A10E' }} 
                                                         titleAccess='Save' />
                                                 </button>
                                             ) : (
                                                 <button 
-                                                    style={{ border: 'none', padding: '0px', background: 'transparent', cursor: 'pointer' }} 
-                                                    onClick={() => handleEditPlayer(player.pid, player.num)}>
+                                                    style={{ background: 'transparent', border: 'none', padding: '0px', cursor: 'pointer' }} 
+                                                    onClick={() => handleEditPlayer(user.pid, user.num)}>
                                                     <AppRegistrationOutlinedIcon 
-                                                        sx={{ color: '#0076B8' }} 
+                                                        sx={{ color: '#0078B9' }} 
                                                         titleAccess='Edit' />
                                                 </button>
                                             )}

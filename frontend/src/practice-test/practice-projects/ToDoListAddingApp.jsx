@@ -1,34 +1,33 @@
 import React, { useState } from 'react';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import AppRegistrationOutlinedIcon from '@mui/icons-material/AppRegistrationOutlined';
 
-const PracticeToDoListComponent = () => {
-    const [toDo, setToDo] = useState('');
+const ToDoListAddingApp = () => {
+    const [addTodo, setAddTodo] = useState('');
     const [items, setItems] = useState([]);
     const [editID, setEditID] = useState(null);
     const [editList, setEditList] = useState('');
 
-    const handleAddTodo = () => {
-        if(!toDo.trim()) {
-            alert('Please add some list.');
+    const handleAddList = () => {
+        if(!addTodo.trim()) {
+            alert('Please enter some list.');
+            return;
         } 
         else {
-            const itemID = Date.now();
+            const todoID = Date.now();
             setItems([
                 ...items,
-                { list: toDo.trim(), id: itemID }
+                { id: todoID, list: addTodo.trim() }
             ]);
         }
 
-        setToDo('');
+        setAddTodo('');
     }
 
-    console.log('Items:', items);
-
     const handleDeleteList = (id) => {
-        const updatedList = items.filter((item) => item.id !== id);
-        setItems(updatedList);
+        const updatedItems = items.filter((item) => item.id !== id);
+        setItems(updatedItems);
     }
 
     const handleSaveList = (id) => {
@@ -47,76 +46,44 @@ const PracticeToDoListComponent = () => {
     }
 
     return (
-        <div style={{ padding: '0px 10px' }}>
-            <h5 style={{ margin: '0px', color: '#8eb6cc' }}>To Do List</h5>
-            <div style={{ 
-                display: 'flex',
-                justifyContent: 'center',
-                margin: '10px 0px',
-                gap: '2%' 
-            }}>
+        <div>
+            <h5 style={{ color: '#0078B9', margin: '0px' }}>Add To Do List</h5>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '2%', margin: '10px' }}>
                 <input 
                     type='text' 
-                    name='todo' 
-                    value={toDo} 
+                    style={{ border: '1px solid #b9c7d8', padding: '5px 8px', outline: 'none', color: '#113159' }} 
+                    value={addTodo} 
                     onChange={(e) => {
-                        setToDo(e.target.value);
-                        console.log('List Value:', e.target.value);
-                    }} 
-                    style={{ 
-                        border: '1px solid #8eb6cc',
-                        padding: '5px 8px',
-                        borderRadius: '5px',
-                        outline: 'none' 
+                        setAddTodo(e.target.value);
                     }} />
                 <button 
-                    style={{ 
-                        border: '2px solid #8eb6cc',
-                        borderRadius: '5px',
-                        color: '#8eb6cc',
-                        fontWeight: 'bold',
-                        background: 'transparent',
-                        cursor: 'pointer'
-                    }} 
-                    onClick={handleAddTodo}>
+                    style={{ border: '2px solid #b9c7d8', borderRadius: '5px', background: 'transparent', color: '#113159', fontWeight: 'bold', cursor: 'pointer' }} 
+                    onClick={handleAddList}>
                     Add List
                 </button>
             </div>
-            <div 
-                style={{ border: '1px solid #8eb6cc', padding: '8px', marginBottom: '10px' }}>
+
+            <div style={{ border: '1px solid #b9c7d8', margin: '10px', padding: '10px' }}>
                 {items.map((item) => {
                     return (
                         <div key={item.id} 
-                            style={{ 
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                padding: '8px',
-                                border: '1px solid #91A30E',
-                                marginBottom: '8px'
-                            }}>
+                            style={{ display: 'flex', justifyContent: 'space-between', border: '1px solid #0078B9', padding: '8px', marginBottom: '8px'}}>
                             {editID === item.id ? (
-                                <input 
-                                    type='text' 
+                                <input type='text' 
                                     value={editList} 
                                     onChange={(e) => {
                                         setEditList(e.target.value);
-                                        console.log('Edit List:', e.target.value);
+                                        console.log('Edit Value:', e.target.value);
                                     }} 
-                                    style={{
-                                        border: '1px solid #8eb6cc',
-                                        padding: '5px 8px',
-                                        width: '90%',
-                                        outline: 'none',
-                                        borderRadius: '5px'
-                                    }} />
+                                    style={{ border: '1px solid #b9c7d8', padding: '5px 8px', outline: 'none', width: '75%', color: '#113159', fontSize: '13px' }} />
                             ) : (
-                                <span>{item.list}</span>
+                                <span style={{ color: '#113159', fontSize: '13px' }}>{item.list}</span>
                             )}
-                            <div style={{ display: 'flex', gap: '2%' }}>
+                            <div style={{ display: 'flex', gap: '5%' }}>
                                 <button style={{ background: 'transparent', border: 'none', padding: '0px', cursor: 'pointer' }} 
                                     onClick={() => handleDeleteList(item.id)}>
-                                    <HighlightOffIcon 
-                                        sx={{ color: '#C42B1C' }} 
+                                    <HighlightOffOutlinedIcon 
+                                        sx={{ color: '#E96725' }} 
                                         titleAccess='Delete' />
                                 </button>
                                 {editID === item.id ? (
@@ -143,4 +110,4 @@ const PracticeToDoListComponent = () => {
     )
 }
 
-export default PracticeToDoListComponent
+export default ToDoListAddingApp
