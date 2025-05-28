@@ -11,7 +11,6 @@
 .container {
   text-align: center;
   width: 90%;
-  background-color: #ECF0F3;
   margin: auto;
   padding: 0px;
 }
@@ -362,3 +361,75 @@ a {
   }
 }
 /* Small Devices Styles */
+
+/* Basic Home Styles */
+.basic-container {
+  padding: 0px;
+  margin: 0px;
+}
+
+.upper-home-container {
+  background-color: #0E1723;
+}
+
+.upper-home-container h5 {
+  margin: 0px;
+  padding: 0px;
+  color: #F6EFE8;
+}
+
+.about-project-container {
+  background-color: #F6EFE8;
+}
+
+.upper-home-navbar {
+  position: fixed;
+  left: 10;
+  top: 0;
+  width: 89%;
+  min-height: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 100;
+  background-color: #0E1723
+}
+
+.upper-home-logo {
+  width: 100%;
+  border-radius: 100%;
+}
+
+.upper-home-icon {
+  display: none;
+}
+
+.upper-home-navmenu {
+  display: flex;
+  justify-content: flex-end;
+  gap: 25px;
+  list-style: none;
+}
+
+.upper-home-navmenu > li {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.upper-home-navmenu > li:hover {
+  color: #3e8ac5;
+  cursor: pointer;
+}
+
+.upper-home-navlinks {
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+}
+
+.upper-home-navlinks:hover {
+  color: #3e8ac5;
+  cursor: pointer;
+}
+/* Basic Home Styles */

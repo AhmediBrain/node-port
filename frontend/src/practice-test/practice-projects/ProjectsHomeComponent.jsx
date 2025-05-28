@@ -10,6 +10,8 @@ import LakersRosterComponent from './LakersRosterComponent';
 import NewUserAddingComponent from './NewUserAddingComponent';
 import ToDoListAddingApp from './ToDoListAddingApp';
 import DynamicNewUserComponent from './DynamicNewUserComponent';
+import KnicksPlayerAveragesComponent from './KnicksPlayerAveragesComponent';
+import knicks_logo from '../../images/knicks_logo.png'
 
 const ProjectsHomeComponent = () => {
     const [showTodo, setShowTodo] = useState(false);
@@ -23,6 +25,7 @@ const ProjectsHomeComponent = () => {
     const [showNew, setShowNew] = useState(false);
     const [showList, setShowList] = useState(false);
     const [showDynamic, setShowDynamic] = useState(false);
+    const [showKnicks, setShowKnicks] = useState(false);
 
     const handleShowToDo = () => {
         setShowTodo(!showTodo);
@@ -66,6 +69,10 @@ const ProjectsHomeComponent = () => {
 
     const handleShowDynamic = () => {
         setShowDynamic(!showDynamic);
+    }
+
+    const handleShowKnicks = () => {
+        setShowKnicks(!showKnicks);
     }
 
     return (
@@ -164,6 +171,30 @@ const ProjectsHomeComponent = () => {
                     {showDynamic ? 'Hide Dynamic New User' : 'Show Dynamic New User'}
                 </button>
                 {showDynamic ? <DynamicNewUserComponent /> : ''}
+            </div>
+            <div style={{ borderBottom: '1px solid #c4c4c5' }}>
+                <button style={{ 
+                        margin: '8px',
+                        cursor: 'pointer',
+                        border: '2px solid #1C4086',
+                        color: '#1C4086',
+                        borderRadius: '5px',
+                        padding: '5px',
+                        fontWeight: 'bold' }} 
+                    onClick={handleShowKnicks}>
+                    {showKnicks ? (
+                        <div>
+                            <img src={knicks_logo} alt='knicks-logo' style={{ width: '25px' }} />
+                            <span>Hide Knicks Player</span>
+                        </div>
+                    ) : (
+                        <div>
+                            <img src={knicks_logo} alt='knicks-logo' style={{ width: '25px' }} />
+                            <span>Show Knicks Player</span>
+                        </div>
+                    )}
+                </button>
+                {showKnicks ? <KnicksPlayerAveragesComponent /> : ''}
             </div>
 
         </div>

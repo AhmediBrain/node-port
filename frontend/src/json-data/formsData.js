@@ -277,6 +277,33 @@ export const lakersTitle = [
     }
 ];
 
+export const knicksTitle = [
+    {
+        id: 1,
+        title: 'Player ID'
+    },
+    {
+        id: 2,
+        title: 'Full Name'
+    },
+    {
+        id: 3,
+        title: 'Position'
+    },
+    {
+        id: 4,
+        title: 'Average'
+    },
+    {
+        id: 5,
+        title: 'Total'
+    },
+    {
+        id: 6,
+        title: 'Action'
+    }
+];
+
 export const leadershipData = [
     {
         "id": 750,
