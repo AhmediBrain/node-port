@@ -5,10 +5,6 @@ import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import AppRegistrationOutlinedIcon from '@mui/icons-material/AppRegistrationOutlined';
 
-// #b3c5ba
-// #13A10E
-// #3f5e3e
-
 const NewUserAddingComponent = () => {
     const [addNew, setAddNew] = useState(
         {
@@ -110,9 +106,20 @@ const NewUserAddingComponent = () => {
         setfilteredUsers(filteredUsers.filter((user) => user.id !== id));
     }
 
-    const handleSaveUserName = (id) => {}
+    const handleSaveUserName = (id) => {
+        const savedValue = users.map(
+            (user) => 
+                user.id === id ? { ...user, username: editUser } : user
+        );
 
-    const handleEditUserName = (id, currentUser) => {}
+        setUsers(savedValue);
+        setEditID(null);
+    }
+
+    const handleEditUserName = (id, currentUser) => {
+        setEditID(id);
+        setEditUser(currentUser);
+    }
 
     return (
         <div style={{ background: 'linear-gradient(180deg,#e9f8ef 0%, #ffffff 100%)', paddingTop: '10px' }}>

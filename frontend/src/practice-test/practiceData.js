@@ -23,11 +23,6 @@ export const usersTitle = [
     }
 ];
 
-// {
-//   id: 5,
-//   title: 'Phone'
-// },
-
 export const initialUsersData = [
   {
     "id": 1,

@@ -9,6 +9,7 @@ import StudentPushInRequest from './StudentPushInRequest';
 import LakersRosterComponent from './LakersRosterComponent';
 import NewUserAddingComponent from './NewUserAddingComponent';
 import ToDoListAddingApp from './ToDoListAddingApp';
+import DynamicNewUserComponent from './DynamicNewUserComponent';
 
 const ProjectsHomeComponent = () => {
     const [showTodo, setShowTodo] = useState(false);
@@ -21,6 +22,7 @@ const ProjectsHomeComponent = () => {
     const [showRoster, setShowRoster] = useState(false);
     const [showNew, setShowNew] = useState(false);
     const [showList, setShowList] = useState(false);
+    const [showDynamic, setShowDynamic] = useState(false);
 
     const handleShowToDo = () => {
         setShowTodo(!showTodo);
@@ -60,6 +62,10 @@ const ProjectsHomeComponent = () => {
 
     const handleShowList = () => {
         setShowList(!showList);
+    }
+
+    const handleShowDynamic = () => {
+        setShowDynamic(!showDynamic);
     }
 
     return (
@@ -145,11 +151,19 @@ const ProjectsHomeComponent = () => {
             
             <div style={{ borderBottom: '1px solid #c4c4c5' }}>
                 <button 
-                    style={{ margin: '8px', cursor: 'pointer', border: '2px solid #CDDAEA', color: '#0078B9', borderRadius: '5px', padding: '5px' }} 
+                    style={{ margin: '8px', cursor: 'pointer', border: '2px solid #63aaaa', color: '#223E3E', borderRadius: '5px', padding: '5px' }} 
                     onClick={handleShowList}>
                     {showList ? 'Hide Add To Do List' : 'Show Add To Do List'}
                 </button>
                 {showList ? <ToDoListAddingApp /> : ''}
+            </div>
+            <div style={{ borderBottom: '1px solid #c4c4c5' }}>
+                <button 
+                    style={{ margin: '8px', cursor: 'pointer', border: '2px solid #3E5A4D', color: '#3E5A4D', borderRadius: '5px', padding: '5px' }} 
+                    onClick={handleShowDynamic}>
+                    {showDynamic ? 'Hide Dynamic New User' : 'Show Dynamic New User'}
+                </button>
+                {showDynamic ? <DynamicNewUserComponent /> : ''}
             </div>
 
         </div>

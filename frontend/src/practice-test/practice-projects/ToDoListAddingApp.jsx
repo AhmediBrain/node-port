@@ -4,39 +4,39 @@ import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 import AppRegistrationOutlinedIcon from '@mui/icons-material/AppRegistrationOutlined';
 
 const ToDoListAddingApp = () => {
-    const [addTodo, setAddTodo] = useState('');
-    const [items, setItems] = useState([]);
+    const [addToDo, setAddToDo] = useState('');
+    const [lists, setLists] = useState([]);
     const [editID, setEditID] = useState(null);
     const [editList, setEditList] = useState('');
 
     const handleAddList = () => {
-        if(!addTodo.trim()) {
-            alert('Please enter some list.');
+        if(!addToDo.trim()) {
+            alert('Please add some list.');
             return;
         } 
         else {
-            const todoID = Date.now();
-            setItems([
-                ...items,
-                { id: todoID, list: addTodo.trim() }
-            ]);
+            const listID = Date.now();
+            setLists([
+                ...lists,
+                { id: listID, list: addToDo.trim() }
+            ])
         }
 
-        setAddTodo('');
+        setAddToDo('');
     }
 
     const handleDeleteList = (id) => {
-        const updatedItems = items.filter((item) => item.id !== id);
-        setItems(updatedItems);
+        const updatedList = lists.filter((item) => item.id !== id);
+        setLists(updatedList);
     }
 
     const handleSaveList = (id) => {
-        const savedValue = items.map(
+        const savedValue = lists.map(
             (item) => 
                 item.id === id ? { ...item, list: editList } : item
         );
 
-        setItems(savedValue);
+        setLists(savedValue);
         setEditID(null);
     }
 
@@ -46,59 +46,57 @@ const ToDoListAddingApp = () => {
     }
 
     return (
-        <div>
-            <h5 style={{ color: '#0078B9', margin: '0px' }}>Add To Do List</h5>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '2%', margin: '10px' }}>
+        <div style={{ background: 'linear-gradient(180deg,rgba(233, 248, 239, 1) 0%, rgba(255, 255, 255, 1) 100%' }}>
+            <h5 style={{ color: '#223E3E', margin: '0px' }}>To Do List App</h5>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '1%', margin: '16px 0px' }}>
                 <input 
                     type='text' 
-                    style={{ border: '1px solid #b9c7d8', padding: '5px 8px', outline: 'none', color: '#113159' }} 
-                    value={addTodo} 
-                    onChange={(e) => {
-                        setAddTodo(e.target.value);
-                    }} />
+                    value={addToDo} 
+                    onChange={(e) => setAddToDo(e.target.value)} 
+                    style={{ border: '1px solid #969999', padding: '5px 8px', outline: 'none', borderRadius: '5px' }} />
                 <button 
-                    style={{ border: '2px solid #b9c7d8', borderRadius: '5px', background: 'transparent', color: '#113159', fontWeight: 'bold', cursor: 'pointer' }} 
+                    style={{ border: '2px solid #223E3E', borderRadius: '5px', color: '#223E3E', cursor: 'pointer' }} 
                     onClick={handleAddList}>
                     Add List
                 </button>
             </div>
 
-            <div style={{ border: '1px solid #b9c7d8', margin: '10px', padding: '10px' }}>
-                {items.map((item) => {
+            <div style={{ border: '1px solid #969999', padding: '8px', margin: '8px' }}>
+                {lists.map((item) => {
                     return (
                         <div key={item.id} 
-                            style={{ display: 'flex', justifyContent: 'space-between', border: '1px solid #0078B9', padding: '8px', marginBottom: '8px'}}>
-                            {editID === item.id ? (
-                                <input type='text' 
-                                    value={editList} 
-                                    onChange={(e) => {
-                                        setEditList(e.target.value);
-                                        console.log('Edit Value:', e.target.value);
-                                    }} 
-                                    style={{ border: '1px solid #b9c7d8', padding: '5px 8px', outline: 'none', width: '75%', color: '#113159', fontSize: '13px' }} />
-                            ) : (
-                                <span style={{ color: '#113159', fontSize: '13px' }}>{item.list}</span>
-                            )}
-                            <div style={{ display: 'flex', gap: '5%' }}>
+                            style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', border: '1px solid #90c7c7', padding: '8px', marginBottom: '10px' }}>
+                            <span style={{ fontSize: '14px', color: '#283f3f' }}>
+                                {editID === item.id ? (
+                                    <input 
+                                        type='text' 
+                                        value={editList} 
+                                        onChange={(e) => setEditList(e.target.value)} 
+                                        style={{ border: '1px solid #969999', outline: 'none', borderRadius: '5px', padding: '5px 8px' }} />
+                                ) : (
+                                    <>{item.list}</>
+                                )}
+                            </span>
+                            <div style={{ display: 'flex', gap: '2%' }}>
                                 <button style={{ background: 'transparent', border: 'none', padding: '0px', cursor: 'pointer' }} 
                                     onClick={() => handleDeleteList(item.id)}>
                                     <HighlightOffOutlinedIcon 
-                                        sx={{ color: '#E96725' }} 
-                                        titleAccess='Delete' />
+                                        titleAccess='Delete' 
+                                        sx={{ color: '#C42B1C' }} />
                                 </button>
                                 {editID === item.id ? (
                                     <button style={{ background: 'transparent', border: 'none', padding: '0px', cursor: 'pointer' }} 
                                         onClick={() => handleSaveList(item.id)}>
                                         <SaveOutlinedIcon 
-                                            sx={{ color: '#13A10E' }} 
-                                            titleAccess='Save' />
+                                            titleAccess='Save' 
+                                            sx={{ color: '#13A10E' }} />
                                     </button>
                                 ) : (
                                     <button style={{ background: 'transparent', border: 'none', padding: '0px', cursor: 'pointer' }} 
                                         onClick={() => handleEditList(item.id, item.list)}>
                                         <AppRegistrationOutlinedIcon 
-                                            sx={{ color: '#0078B9' }} 
-                                            titleAccess='Edit' />
+                                            titleAccess='Edit' 
+                                            sx={{ color: '#0078B9' }} />
                                     </button>
                                 )}
                             </div>
